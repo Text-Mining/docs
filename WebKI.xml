@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title=". constructor" Url="html/M-TextMiningApi.Startup.-ctor.htm" />
+  <HelpKINode Title=".Configuration property" Url="html/P-TextMiningApi.Startup.Configuration.htm" />
+  <HelpKINode Title=".Configure method" Url="html/M-TextMiningApi.Startup.Configure.htm" />
+  <HelpKINode Title=".ConfigureServices method" Url="html/M-TextMiningApi.Startup.ConfigureServices.htm" />
+  <HelpKINode Title=".CreateWebHostBuilder method" Url="html/M-TextMiningApi.Program.CreateWebHostBuilder.htm" />
+  <HelpKINode Title=".GetToken method" Url="html/M-TextMiningApi.Controllers.TokenController.GetToken.htm" />
+  <HelpKINode Title=".Main method" Url="html/M-TextMiningApi.Program.Main.htm" />
+  <HelpKINode Title="CheckSlang property">
+    <HelpKINode Title="CheckSlang Property " Url="html/P-TextMiningApi.Models.SentenceSplitterModel.CheckSlang.htm" />
+    <HelpKINode Title="CheckSlang Property " Url="html/P-TextMiningApi.Models.StemmerModel.CheckSlang.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ComplexSentence property">
+    <HelpKINode Title="ComplexSentence Property " Url="html/P-TextMiningApi.Models.StemmerModel.ComplexSentence.htm" />
+    <HelpKINode Title="ComplexSentence Property " Url="html/P-TextMiningApi.Models.SentenceSplitterModel.ComplexSentence.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Configuration property" Url="html/P-TextMiningApi.Startup.Configuration.htm" />
+  <HelpKINode Title="Configure method" Url="html/M-TextMiningApi.Startup.Configure.htm" />
+  <HelpKINode Title="ConfigureServices method" Url="html/M-TextMiningApi.Startup.ConfigureServices.htm" />
+  <HelpKINode Title="CreateWebHostBuilder method" Url="html/M-TextMiningApi.Program.CreateWebHostBuilder.htm" />
+  <HelpKINode Title="DistanceFunc property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.DistanceFunc.htm" />
+  <HelpKINode Title="ExtractSynonyms method" Url="html/M-TextMiningApi.Controllers.TextSimilarityController.ExtractSynonyms.htm" />
+  <HelpKINode Title="FormalConverter method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.FormalConverter.htm" />
+  <HelpKINode Title="GetPos method" Url="html/M-TextMiningApi.Controllers.PosTaggerController.GetPos.htm" />
+  <HelpKINode Title="GetSyntacticDistance method" Url="html/M-TextMiningApi.Controllers.TextSimilarityController.GetSyntacticDistance.htm" />
+  <HelpKINode Title="GetToken method" Url="html/M-TextMiningApi.Controllers.TokenController.GetToken.htm" />
+  <HelpKINode Title="IsSynonym method" Url="html/M-TextMiningApi.Controllers.TextSimilarityController.IsSynonym.htm" />
+  <HelpKINode Title="KeepSeparator property" Url="html/P-TextMiningApi.Models.SentenceSplitterModel.KeepSeparator.htm" />
+  <HelpKINode Title="LemmatizePhrase2Phrase method" Url="html/M-TextMiningApi.Controllers.StemmerController.LemmatizePhrase2Phrase.htm" />
+  <HelpKINode Title="LemmatizeText2Phrase method" Url="html/M-TextMiningApi.Controllers.StemmerController.LemmatizeText2Phrase.htm" />
+  <HelpKINode Title="LemmatizeText2Text method" Url="html/M-TextMiningApi.Controllers.StemmerController.LemmatizeText2Text.htm" />
+  <HelpKINode Title="LemmatizeWords2Phrase method" Url="html/M-TextMiningApi.Controllers.StemmerController.LemmatizeWords2Phrase.htm" />
+  <HelpKINode Title="Level property" Url="html/P-TextMiningApi.Models.StemmerModel.Level.htm" />
+  <HelpKINode Title="Main method" Url="html/M-TextMiningApi.Program.Main.htm" />
+  <HelpKINode Title="MinDistThreshold property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.MinDistThreshold.htm" />
+  <HelpKINode Title="Normalize property" Url="html/P-TextMiningApi.Models.SentenceSplitterModel.Normalize.htm" />
+  <HelpKINode Title="NormalizePersianWord method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.NormalizePersianWord.htm" />
+  <HelpKINode Title="NormalizerModel class">
+    <HelpKINode Title="NormalizerModel Class" Url="html/T-TextMiningApi.Models.NormalizerModel.htm" />
+    <HelpKINode Title="NormalizerModel Members" Url="html/AllMembers.T-TextMiningApi.Models.NormalizerModel.htm" />
+    <HelpKINode Title="about NormalizerModel class" Url="html/T-TextMiningApi.Models.NormalizerModel.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-TextMiningApi.Models.NormalizerModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-TextMiningApi.Models.NormalizerModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NormalizerModel.RefineQuotationPunc property" Url="html/P-TextMiningApi.Models.NormalizerModel.RefineQuotationPunc.htm" />
+  <HelpKINode Title="NormalizerModel.RefineSeparatedAffix property" Url="html/P-TextMiningApi.Models.NormalizerModel.RefineSeparatedAffix.htm" />
+  <HelpKINode Title="NormalizerModel.ReplaceDigit property" Url="html/P-TextMiningApi.Models.NormalizerModel.ReplaceDigit.htm" />
+  <HelpKINode Title="NormalizerModel.ReplaceWildChar property" Url="html/P-TextMiningApi.Models.NormalizerModel.ReplaceWildChar.htm" />
+  <HelpKINode Title="NormalizerModel.Text property" Url="html/P-TextMiningApi.Models.NormalizerModel.Text.htm" />
+  <HelpKINode Title="NormalizerParams property" Url="html/P-TextMiningApi.Models.SentenceSplitterModel.NormalizerParams.htm" />
+  <HelpKINode Title="Phrases property" Url="html/P-TextMiningApi.Models.StemmerModel.Phrases.htm" />
+  <HelpKINode Title="PosTaggerController class">
+    <HelpKINode Title="PosTaggerController Class" Url="html/T-TextMiningApi.Controllers.PosTaggerController.htm" />
+    <HelpKINode Title="PosTaggerController Members" Url="html/AllMembers.T-TextMiningApi.Controllers.PosTaggerController.htm" />
+    <HelpKINode Title="about PosTaggerController class" Url="html/T-TextMiningApi.Controllers.PosTaggerController.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-TextMiningApi.Controllers.PosTaggerController.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-TextMiningApi.Controllers.PosTaggerController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PosTaggerController.GetPos method" Url="html/M-TextMiningApi.Controllers.PosTaggerController.GetPos.htm" />
+  <HelpKINode Title="PreProcessingController class">
+    <HelpKINode Title="PreProcessingController Class" Url="html/T-TextMiningApi.Controllers.PreProcessingController.htm" />
+    <HelpKINode Title="PreProcessingController Members" Url="html/AllMembers.T-TextMiningApi.Controllers.PreProcessingController.htm" />
+    <HelpKINode Title="about PreProcessingController class" Url="html/T-TextMiningApi.Controllers.PreProcessingController.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-TextMiningApi.Controllers.PreProcessingController.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-TextMiningApi.Controllers.PreProcessingController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PreProcessingController.FormalConverter method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.FormalConverter.htm" />
+  <HelpKINode Title="PreProcessingController.NormalizePersianWord method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.NormalizePersianWord.htm" />
+  <HelpKINode Title="PreProcessingController.SentenceSplitter method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.SentenceSplitter.htm" />
+  <HelpKINode Title="PreProcessingController.SentenceSplitterAndTokenize method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.SentenceSplitterAndTokenize.htm" />
+  <HelpKINode Title="PreProcessingController.SpellCorrector method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.SpellCorrector.htm" />
+  <HelpKINode Title="PreProcessingController.Tokenize method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.Tokenize.htm" />
+  <HelpKINode Title="RefineQuotationPunc property" Url="html/P-TextMiningApi.Models.NormalizerModel.RefineQuotationPunc.htm" />
+  <HelpKINode Title="RefineSeparatedAffix property" Url="html/P-TextMiningApi.Models.NormalizerModel.RefineSeparatedAffix.htm" />
+  <HelpKINode Title="ReplaceDigit property" Url="html/P-TextMiningApi.Models.NormalizerModel.ReplaceDigit.htm" />
+  <HelpKINode Title="ReplaceWildChar property" Url="html/P-TextMiningApi.Models.NormalizerModel.ReplaceWildChar.htm" />
+  <HelpKINode Title="SentenceSimilarityWithIntersectionMatching method" Url="html/M-TextMiningApi.Controllers.TextSimilarityController.SentenceSimilarityWithIntersectionMatching.htm" />
+  <HelpKINode Title="SentenceSimilarityWithNGramMatching method" Url="html/M-TextMiningApi.Controllers.TextSimilarityController.SentenceSimilarityWithNGramMatching.htm" />
+  <HelpKINode Title="SentenceSplitter method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.SentenceSplitter.htm" />
+  <HelpKINode Title="SentenceSplitterAndTokenize method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.SentenceSplitterAndTokenize.htm" />
+  <HelpKINode Title="SentenceSplitterModel class">
+    <HelpKINode Title="SentenceSplitterModel Class" Url="html/T-TextMiningApi.Models.SentenceSplitterModel.htm" />
+    <HelpKINode Title="SentenceSplitterModel Members" Url="html/AllMembers.T-TextMiningApi.Models.SentenceSplitterModel.htm" />
+    <HelpKINode Title="about SentenceSplitterModel class" Url="html/T-TextMiningApi.Models.SentenceSplitterModel.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-TextMiningApi.Models.SentenceSplitterModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-TextMiningApi.Models.SentenceSplitterModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SentenceSplitterModel.CheckSlang property" Url="html/P-TextMiningApi.Models.SentenceSplitterModel.CheckSlang.htm" />
+  <HelpKINode Title="SentenceSplitterModel.ComplexSentence property" Url="html/P-TextMiningApi.Models.SentenceSplitterModel.ComplexSentence.htm" />
+  <HelpKINode Title="SentenceSplitterModel.KeepSeparator property" Url="html/P-TextMiningApi.Models.SentenceSplitterModel.KeepSeparator.htm" />
+  <HelpKINode Title="SentenceSplitterModel.Normalize property" Url="html/P-TextMiningApi.Models.SentenceSplitterModel.Normalize.htm" />
+  <HelpKINode Title="SentenceSplitterModel.NormalizerParams property" Url="html/P-TextMiningApi.Models.SentenceSplitterModel.NormalizerParams.htm" />
+  <HelpKINode Title="SentenceSplitterModel.Text property" Url="html/P-TextMiningApi.Models.SentenceSplitterModel.Text.htm" />
+  <HelpKINode Title="SpellCorrector method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.SpellCorrector.htm" />
+  <HelpKINode Title="StemmerController class">
+    <HelpKINode Title="StemmerController Class" Url="html/T-TextMiningApi.Controllers.StemmerController.htm" />
+    <HelpKINode Title="StemmerController Members" Url="html/AllMembers.T-TextMiningApi.Controllers.StemmerController.htm" />
+    <HelpKINode Title="about StemmerController class" Url="html/T-TextMiningApi.Controllers.StemmerController.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-TextMiningApi.Controllers.StemmerController.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-TextMiningApi.Controllers.StemmerController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="StemmerController.LemmatizePhrase2Phrase method" Url="html/M-TextMiningApi.Controllers.StemmerController.LemmatizePhrase2Phrase.htm" />
+  <HelpKINode Title="StemmerController.LemmatizeText2Phrase method" Url="html/M-TextMiningApi.Controllers.StemmerController.LemmatizeText2Phrase.htm" />
+  <HelpKINode Title="StemmerController.LemmatizeText2Text method" Url="html/M-TextMiningApi.Controllers.StemmerController.LemmatizeText2Text.htm" />
+  <HelpKINode Title="StemmerController.LemmatizeWords2Phrase method" Url="html/M-TextMiningApi.Controllers.StemmerController.LemmatizeWords2Phrase.htm" />
+  <HelpKINode Title="StemmerModel class">
+    <HelpKINode Title="StemmerModel Class" Url="html/T-TextMiningApi.Models.StemmerModel.htm" />
+    <HelpKINode Title="StemmerModel Members" Url="html/AllMembers.T-TextMiningApi.Models.StemmerModel.htm" />
+    <HelpKINode Title="about StemmerModel class" Url="html/T-TextMiningApi.Models.StemmerModel.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-TextMiningApi.Models.StemmerModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-TextMiningApi.Models.StemmerModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="StemmerModel.CheckSlang property" Url="html/P-TextMiningApi.Models.StemmerModel.CheckSlang.htm" />
+  <HelpKINode Title="StemmerModel.ComplexSentence property" Url="html/P-TextMiningApi.Models.StemmerModel.ComplexSentence.htm" />
+  <HelpKINode Title="StemmerModel.Level property" Url="html/P-TextMiningApi.Models.StemmerModel.Level.htm" />
+  <HelpKINode Title="StemmerModel.Phrases property" Url="html/P-TextMiningApi.Models.StemmerModel.Phrases.htm" />
+  <HelpKINode Title="StemmerModel.Text property" Url="html/P-TextMiningApi.Models.StemmerModel.Text.htm" />
+  <HelpKINode Title="Text property">
+    <HelpKINode Title="Text Property " Url="html/P-TextMiningApi.Models.SentenceSplitterModel.Text.htm" />
+    <HelpKINode Title="Text Property " Url="html/P-TextMiningApi.Models.StemmerModel.Text.htm" />
+    <HelpKINode Title="Text Property " Url="html/P-TextMiningApi.Models.NormalizerModel.Text.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextMiningApi.Controllers namespace" Url="html/N-TextMiningApi.Controllers.htm" />
+  <HelpKINode Title="TextMiningApi.Controllers.PosTaggerController class">
+    <HelpKINode Title="PosTaggerController Class" Url="html/T-TextMiningApi.Controllers.PosTaggerController.htm" />
+    <HelpKINode Title="PosTaggerController Members" Url="html/AllMembers.T-TextMiningApi.Controllers.PosTaggerController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextMiningApi.Controllers.PreProcessingController class">
+    <HelpKINode Title="PreProcessingController Class" Url="html/T-TextMiningApi.Controllers.PreProcessingController.htm" />
+    <HelpKINode Title="PreProcessingController Members" Url="html/AllMembers.T-TextMiningApi.Controllers.PreProcessingController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextMiningApi.Controllers.StemmerController class">
+    <HelpKINode Title="StemmerController Class" Url="html/T-TextMiningApi.Controllers.StemmerController.htm" />
+    <HelpKINode Title="StemmerController Members" Url="html/AllMembers.T-TextMiningApi.Controllers.StemmerController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextMiningApi.Controllers.TextSimilarityController class">
+    <HelpKINode Title="TextSimilarityController Class" Url="html/T-TextMiningApi.Controllers.TextSimilarityController.htm" />
+    <HelpKINode Title="TextSimilarityController Members" Url="html/AllMembers.T-TextMiningApi.Controllers.TextSimilarityController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextMiningApi.Models namespace" Url="html/N-TextMiningApi.Models.htm" />
+  <HelpKINode Title="TextMiningApi.Models.NormalizerModel class">
+    <HelpKINode Title="NormalizerModel Class" Url="html/T-TextMiningApi.Models.NormalizerModel.htm" />
+    <HelpKINode Title="NormalizerModel Members" Url="html/AllMembers.T-TextMiningApi.Models.NormalizerModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextMiningApi.Models.SentenceSplitterModel class">
+    <HelpKINode Title="SentenceSplitterModel Class" Url="html/T-TextMiningApi.Models.SentenceSplitterModel.htm" />
+    <HelpKINode Title="SentenceSplitterModel Members" Url="html/AllMembers.T-TextMiningApi.Models.SentenceSplitterModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextMiningApi.Models.StemmerModel class">
+    <HelpKINode Title="StemmerModel Class" Url="html/T-TextMiningApi.Models.StemmerModel.htm" />
+    <HelpKINode Title="StemmerModel Members" Url="html/AllMembers.T-TextMiningApi.Models.StemmerModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextMiningApi.Models.TextSimilarityModel class">
+    <HelpKINode Title="TextSimilarityModel Class" Url="html/T-TextMiningApi.Models.TextSimilarityModel.htm" />
+    <HelpKINode Title="TextSimilarityModel Members" Url="html/AllMembers.T-TextMiningApi.Models.TextSimilarityModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextSimilarityController class">
+    <HelpKINode Title="TextSimilarityController Class" Url="html/T-TextMiningApi.Controllers.TextSimilarityController.htm" />
+    <HelpKINode Title="TextSimilarityController Members" Url="html/AllMembers.T-TextMiningApi.Controllers.TextSimilarityController.htm" />
+    <HelpKINode Title="about TextSimilarityController class" Url="html/T-TextMiningApi.Controllers.TextSimilarityController.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-TextMiningApi.Controllers.TextSimilarityController.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-TextMiningApi.Controllers.TextSimilarityController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextSimilarityController.ExtractSynonyms method" Url="html/M-TextMiningApi.Controllers.TextSimilarityController.ExtractSynonyms.htm" />
+  <HelpKINode Title="TextSimilarityController.GetSyntacticDistance method" Url="html/M-TextMiningApi.Controllers.TextSimilarityController.GetSyntacticDistance.htm" />
+  <HelpKINode Title="TextSimilarityController.IsSynonym method" Url="html/M-TextMiningApi.Controllers.TextSimilarityController.IsSynonym.htm" />
+  <HelpKINode Title="TextSimilarityController.SentenceSimilarityWithIntersectionMatching method" Url="html/M-TextMiningApi.Controllers.TextSimilarityController.SentenceSimilarityWithIntersectionMatching.htm" />
+  <HelpKINode Title="TextSimilarityController.SentenceSimilarityWithNGramMatching method" Url="html/M-TextMiningApi.Controllers.TextSimilarityController.SentenceSimilarityWithNGramMatching.htm" />
+  <HelpKINode Title="TextSimilarityModel class">
+    <HelpKINode Title="TextSimilarityModel Class" Url="html/T-TextMiningApi.Models.TextSimilarityModel.htm" />
+    <HelpKINode Title="TextSimilarityModel Members" Url="html/AllMembers.T-TextMiningApi.Models.TextSimilarityModel.htm" />
+    <HelpKINode Title="about TextSimilarityModel class" Url="html/T-TextMiningApi.Models.TextSimilarityModel.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-TextMiningApi.Models.TextSimilarityModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-TextMiningApi.Models.TextSimilarityModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextSimilarityModel.DistanceFunc property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.DistanceFunc.htm" />
+  <HelpKINode Title="TextSimilarityModel.MinDistThreshold property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.MinDistThreshold.htm" />
+  <HelpKINode Title="TextSimilarityModel.Tokens1 property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.Tokens1.htm" />
+  <HelpKINode Title="TextSimilarityModel.Tokens2 property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.Tokens2.htm" />
+  <HelpKINode Title="TextSimilarityModel.Word1 property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.Word1.htm" />
+  <HelpKINode Title="TextSimilarityModel.Word2 property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.Word2.htm" />
+  <HelpKINode Title="Tokenize method" Url="html/M-TextMiningApi.Controllers.PreProcessingController.Tokenize.htm" />
+  <HelpKINode Title="Tokens1 property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.Tokens1.htm" />
+  <HelpKINode Title="Tokens2 property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.Tokens2.htm" />
+  <HelpKINode Title="Word1 property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.Word1.htm" />
+  <HelpKINode Title="Word2 property" Url="html/P-TextMiningApi.Models.TextSimilarityModel.Word2.htm" />
+</HelpKI>
