@@ -1,0 +1,40 @@
+theme = "docuapi"
+languageCode = "fa-ir"
+baseurl = "http://docs.text-mining.ir/"
+title = "مستندات سرویس متن‌کاوی"
+
+# Code higlighting settings
+pygmentsCodefences = true
+pygmentsCodeFencesGuesSsyntax = false
+pygmentsOptions = ""
+pygmentsStyle = "monokai"
+# The monokai stylesheet is included in the base template.
+pygmentsUseClasses = true
+
+defaultContentLanguage = "fa"
+
+[params]
+search = true
+  
+# Configure the language example tabs.
+[[params.language_tabs]]
+key = "csharp"
+name = "C#" 
+[[params.language_tabs]]
+key = "python"
+name = "Python"
+
+
+#Languages 
+[languages]
+
+[languages.fa]
+languageName = "فارسی"
+weight = 1
+title = "مستندات سرویس متن‌کاوی"
+
+# Left sidebar footer items. Use HTMl or Markdown.
+toc_footers = [ 
+"<a href='http://app.text-mining.ir'>ثبت‌نام و دریافت کلید API</a>",
+]
+
