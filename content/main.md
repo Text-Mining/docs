@@ -299,3 +299,34 @@ inputText |  | متن ورودی
 عنوان | مقدار پیش‌فرض | توضیح پارامتر
 --------- | ------- | -----------
 inputText |  | متن ورودی
+
+# زبان متون
+
+## شناسایی نوع زبان
+
+این تابع حدود ۶۰ نوع زبان را برای متن ورودی شناسایی کند
+[https://iso639-3.sil.org/code_tables/639/data/all](https://iso639-3.sil.org/code_tables/639/data/all)
+
+```csharp
+
+//ToDo: Predict c# code
+
+```
+
+```python
+
+#ToDo: Predict python code
+
+
+```
+
+
+### آدرس و نوع تابع وب‌سرویس
+
+`POST https://api.text-mining.ir/api/LanguageDetection/Predict`
+
+### مدل دریافتی به عنوان پارامتر
+
+عنوان | مقدار پیش‌فرض | توضیح پارامتر
+--------- | ------- | -----------
+inputText |  | متن ورودی
