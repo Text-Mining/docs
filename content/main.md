@@ -53,7 +53,7 @@ print(response.text)
 برای شروع باید یک [کلید API](https://app.text-mining.ir) دریافت کنید. سپس برای دریافت توکن تابع زیر را فراخوانی کنید
 
 
-`GET https://api.text-mining.ir/api/Token?apikey=YOUR_API_KEY`
+`GET https://api.text-mining.ir/api/Token/GetToken?apikey=YOUR_API_KEY`
 
 
 <aside class="notice">
