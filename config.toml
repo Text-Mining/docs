@@ -23,6 +23,18 @@ name = "C#"
 [[params.language_tabs]]
 key = "python"
 name = "Python"
+[[params.language_tabs]]
+key = "go"
+name = "Go" 
+[[params.language_tabs]]
+key = "nodejs"
+name = "NodeJS" 
+[[params.language_tabs]]
+key = "php"
+name = "PHP" 
+[[params.language_tabs]]
+key = "javascript"
+name = "Javascript"
 
 
 #Languages 
