@@ -27,7 +27,7 @@ name = "Python"
 key = "go"
 name = "Go" 
 [[params.language_tabs]]
-key = "nodejs"
+key = "js"
 name = "NodeJS" 
 [[params.language_tabs]]
 key = "php"

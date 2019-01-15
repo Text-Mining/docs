@@ -39,6 +39,97 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 print(response.text)
 ```
 
+```go
+
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://api.text-mining.ir/api/Token/GetToken?apikey=YOUR_API_KEY"
+
+	req, _ := http.NewRequest("GET", url, nil)
+	req.Header.Add("cache-control", "no-cache")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
+}
+
+```
+
+
+```js
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://api.text-mining.ir/api/Token/GetToken',
+  qs: { apikey: 'YOUR_API_KEY' },
+  headers: 
+   {'cache-control': 'no-cache' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+
+```
+
+```php
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/Token/GetToken');
+$request->setMethod(HTTP_METH_GET);
+
+$request->setQueryData(array(
+  'apikey' => 'YOUR_API_KEY'
+));
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache'
+));
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+```
+
+```javascript
+
+var data = null;
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("GET", "https://api.text-mining.ir/api/Token/GetToken?apikey=YOUR_API_KEY");
+xhr.setRequestHeader("cache-control", "no-cache");
+
+xhr.send(data);
+
+```
 
 > در صورت موفق بودن درخواست، خروجی شبیه زیر برگردانده می‌شود که `TOKEN_VALUE` همان توکن احراز هویت شماست
 
