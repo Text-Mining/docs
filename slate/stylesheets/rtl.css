@@ -5,7 +5,7 @@ body,html,h1,h2,h3,h4,h5,h6{
 .tocify-wrapper .tocify-item>a,.tocify-wrapper .toc-footer li,
  .tocify-wrapper .toc-footer a,
  .content table, .content table td,
- .content table th{
+ .content table th, ul li{
     direction: rtl ;text-align: right;
 }
 .content code, .content p code{

@@ -17,7 +17,7 @@
 
     
 </head>
-<body class="index" data-languages="[ &#34;csharp&#34; ,  &#34;python&#34; ]">
+<body class="index" data-languages="[ &#34;csharp&#34; ,  &#34;python&#34; ,  &#34;go&#34; ,  &#34;nodejs&#34; ,  &#34;php&#34; ,  &#34;javascript&#34; ]">
     <a href="#" id="nav-button">
         <span>
         NAV
@@ -33,6 +33,14 @@
             <a href="#" data-language-name="csharp">C#</a>
             
             <a href="#" data-language-name="python">Python</a>
+            
+            <a href="#" data-language-name="go">Go</a>
+            
+            <a href="#" data-language-name="nodejs">NodeJS</a>
+            
+            <a href="#" data-language-name="php">PHP</a>
+            
+            <a href="#" data-language-name="javascript">Javascript</a>
             
         </div>
          
@@ -62,7 +70,7 @@
     
         
 
-<h1 id="معرفی">معرفی</h1>
+<h1 id="شروع-به-کار">شروع به کار</h1>
 
 <blockquote>
 <p>دریافت کلید API برنامه‌نویسان برای استفاده از امکانات از سایت <a href="https://app.text-mining.ir">https://app.text-mining.ir</a> می‌باشد</p>
@@ -406,6 +414,81 @@
 </tbody>
 </table>
 
+<h1 id="زبان-متون">زبان متون</h1>
+
+<h2 id="شناسایی-نوع-زبان">شناسایی نوع زبان</h2>
+
+<p>این تابع حدود ۶۰ نوع زبان را برای متن ورودی شناسایی کند
+<a href="https://iso639-3.sil.org/code_tables/639/data/all">https://iso639-3.sil.org/code_tables/639/data/all</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">Predict</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#ToDo: Predict python code</span></code></pre></div>
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-7">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/LanguageDetection/Predict</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-7">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>inputText</td>
+<td></td>
+<td>متن ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="موجودیت-های-نامدار-متون">موجودیت‌های نامدار متون</h1>
+
+<h2 id="شناسایی-موجودیت-های-نامدار-متن">شناسایی موجودیت‌های نامدار متن</h2>
+
+<p>لیست عبارات بهمراه برچسب نوع موجودیت. این برچسب یکی از موارد زیر می‌باشد:</p>
+
+<ul>
+<li>O - عدم وجود موجودیت</li>
+<li>B-PER - شروع موجودیت شخص یا نام فرد</li>
+<li>I-PER - ادامه موجودیت شخص یا نام فرد</li>
+<li>B-LOC - شروع موجودیت مکان یا محل خاص</li>
+<li>I-LOC - ادامه موجودیت مکان یا محل خاص</li>
+<li>B-ORG - شروع موجودیت نام سازمان یا تشکل</li>
+<li>I-ORG - ادامه موجودیت نام سازمان یا تشکل</li>
+<li>B-DAT - شروع موجودیت تاریخ یا زمان</li>
+<li>I-DAT - ادامه موجودیت تاریخ یا زمان</li>
+<li>B-EVE - شروع موجودیت رویداد یا حادثه</li>
+<li>I-EVE - ادامه موجودیت رویداد یا حادثه</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">NamedEntityRecognitionDetect</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#ToDo: NamedEntityRecognitionDetect python code</span></code></pre></div>
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-8">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/NamedEntityRecognition/Detect</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-8">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>inputText</td>
+<td></td>
+<td>متن ورودی</td>
+</tr>
+</tbody>
+</table>
+
     
         
 
@@ -458,6 +541,14 @@
                 <a href="#" data-language-name="csharp">C#</a>
                 
                 <a href="#" data-language-name="python">Python</a>
+                
+                <a href="#" data-language-name="go">Go</a>
+                
+                <a href="#" data-language-name="nodejs">NodeJS</a>
+                
+                <a href="#" data-language-name="php">PHP</a>
+                
+                <a href="#" data-language-name="javascript">Javascript</a>
                 
             </div>
             
