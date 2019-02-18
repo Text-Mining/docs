@@ -20,21 +20,7 @@ search = true
 [[params.language_tabs]]
 key = "csharp"
 name = "C#" 
-[[params.language_tabs]]
-key = "python"
-name = "Python"
-[[params.language_tabs]]
-key = "go"
-name = "Go" 
-[[params.language_tabs]]
-key = "js"
-name = "NodeJS" 
-[[params.language_tabs]]
-key = "php"
-name = "PHP" 
-[[params.language_tabs]]
-key = "javascript"
-name = "Javascript"
+
 
 
 #Languages 
