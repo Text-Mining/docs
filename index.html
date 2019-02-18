@@ -17,7 +17,7 @@
 
     
 </head>
-<body class="index" data-languages="[ &#34;csharp&#34; ,  &#34;python&#34; ,  &#34;go&#34; ,  &#34;js&#34; ,  &#34;php&#34; ,  &#34;javascript&#34; ]">
+<body class="index" data-languages="[ &#34;csharp&#34; ]">
     <a href="#" id="nav-button">
         <span>
         NAV
@@ -31,16 +31,6 @@
         <div class="lang-selector">
             
             <a href="#" data-language-name="csharp">C#</a>
-            
-            <a href="#" data-language-name="python">Python</a>
-            
-            <a href="#" data-language-name="go">Go</a>
-            
-            <a href="#" data-language-name="js">NodeJS</a>
-            
-            <a href="#" data-language-name="php">PHP</a>
-            
-            <a href="#" data-language-name="javascript">Javascript</a>
             
         </div>
          
@@ -91,95 +81,24 @@
 <blockquote>
 <p>مطمئن شوید که <code>YOUR_API_KEY</code> را با کلید API دریافتی خود جایگزین کرده‌اید</p>
 </blockquote>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">client</span><span class="p">=</span><span class="k">new</span> <span class="n">RestClinet</span><span class="p">(</span><span class="s">&#34;https://api.text-mining.ir/api/Token/GetToken/apikey=YOUR_API_KEY&#34;</span><span class="p">);</span>
-<span class="kt">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RestRequest</span><span class="p">(</span><span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">);</span>
-<span class="n">request</span><span class="p">.</span><span class="n">AddHeader</span><span class="p">(</span><span class="s">&#34;Cache-Control&#34;</span><span class="p">,</span><span class="s">&#34;no-cache&#34;</span><span class="p">);</span>
-<span class="n">IRestResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;https://api.text-mining.ir/api/Token/GetToken&#34;</span>
-<span class="n">querystring</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;apikey&#34;</span><span class="p">:</span><span class="s2">&#34;YOUR_API_KEY&#34;</span><span class="p">}</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Cache-Control&#39;</span><span class="p">:</span> <span class="s2">&#34;no-cache&#34;</span><span class="p">}</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">querystring</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;fmt&#34;</span>
-	<span class="s">&#34;net/http&#34;</span>
-	<span class="s">&#34;io/ioutil&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-
-	<span class="nx">url</span> <span class="o">:=</span> <span class="s">&#34;https://api.text-mining.ir/api/Token/GetToken?apikey=YOUR_API_KEY&#34;</span>
-
-	<span class="nx">req</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">NewRequest</span><span class="p">(</span><span class="s">&#34;GET&#34;</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-	<span class="nx">req</span><span class="p">.</span><span class="nx">Header</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="s">&#34;cache-control&#34;</span><span class="p">,</span> <span class="s">&#34;no-cache&#34;</span><span class="p">)</span>
-
-	<span class="nx">res</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Do</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
-
-	<span class="k">defer</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
-	<span class="nx">body</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nx">ReadAll</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
-
-	<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">body</span><span class="p">))</span>
-
-<span class="p">}</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;request&#34;</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
-  <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;https://api.text-mining.ir/api/Token/GetToken&#39;</span><span class="p">,</span>
-  <span class="nx">qs</span><span class="o">:</span> <span class="p">{</span> <span class="nx">apikey</span><span class="o">:</span> <span class="s1">&#39;YOUR_API_KEY&#39;</span> <span class="p">},</span>
-  <span class="nx">headers</span><span class="o">:</span> 
-   <span class="p">{</span><span class="s1">&#39;cache-control&#39;</span><span class="o">:</span> <span class="s1">&#39;no-cache&#39;</span> <span class="p">}</span> <span class="p">};</span>
-
-<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
-
-<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/Token/GetToken&#39;</span><span class="p">);</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_GET</span><span class="p">);</span>
-
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">&#39;apikey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;YOUR_API_KEY&#39;</span>
-<span class="p">));</span>
-
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span>
-<span class="p">));</span>
-
-<span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
-
-  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
-<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">withCredentials</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;readystatechange&#34;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="s2">&#34;https://api.text-mining.ir/api/Token/GetToken?apikey=YOUR_API_KEY&#34;</span><span class="p">);</span>
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&#34;cache-control&#34;</span><span class="p">,</span> <span class="s2">&#34;no-cache&#34;</span><span class="p">);</span>
-
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">private</span> <span class="kt">string</span> <span class="n">GetJWTToken</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">string</span> <span class="n">jwtToken</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+    <span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="s">$&#34;https://api.text-mining.ir/api/Token/GetToken?apikey={YOUR_API_KEY}&#34;</span><span class="p">).</span><span class="n">Result</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">string</span> <span class="n">res</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+        <span class="n">jwtToken</span> <span class="p">=</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="n">JObject</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="na">[&#34;token&#34;]</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">jwtToken</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 <blockquote>
-<p>در صورت موفق بودن درخواست، خروجی شبیه زیر برگردانده می‌شود که <code>TOKEN_VALUE</code> همان توکن احراز هویت شماست</p>
+<p>در صورت موفق بودن درخواست، خروجی شبیه زیر برگردانده می‌شود که <code>TOKEN_VALUE</code> همان توکن احراز هویت شماست.</p>
 </blockquote>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json">  <span class="p">{</span>
-    <span class="nt">&#34;token&#34;</span><span class="p">:</span> <span class="s2">&#34;TOKEN_VALUE&#34;</span>
-  <span class="p">}</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;token&#34;</span><span class="p">:</span> <span class="s2">&#34;TOKEN_VALUE&#34;</span>
+<span class="p">}</span></code></pre></div>
 <p>اولین گام در استفاده از توابع API متن‌کاوی احراز هویت است. احراز هویت به وسیله توکن‌های JWT در درخواست http انجام می‌شود.
 برای شروع باید یک <a href="https://app.text-mining.ir">کلید API</a> دریافت کنید. سپس برای دریافت توکن تابع زیر را فراخوانی کنید</p>
 
@@ -189,14 +108,31 @@
 عبارت  <code>YOUR_API_KEY</code> را با مقدار کلید API دریافتی خود جایگزین کنید
 </aside>
 
-<p>بعد از دریافت خروجی که یک <code>JWT Token</code> است باید برای احراز هویت (Authentication &amp; Authorization) برای استفاده از هر یک از توابع وب سرویس در <code>Header</code> مربوط به  <code>Http Request</code> خود برای آن تابع مقدار توکن دریافتی را وارد کنید. کدهای نمونه فراخوانی توابع وب سرویس این مورد را به شما نمایش می‌دهند</p>
+<p>بعد از دریافت خروجی که یک <code>JWT Token</code> است باید برای احراز هویت (Authentication &amp; Authorization) برای استفاده از هر یک از توابع وب سرویس در <code>Header</code> مربوط به <code>Http Request</code> خود برای آن تابع مقدار توکن دریافتی را وارد کنید. کدهای نمونه فراخوانی توابع وب سرویس این مورد را به شما نمایش می‌دهند</p>
 
 <h1 id="پیش-پردازش-متون">پیش پردازش متون</h1>
 
 <h2 id="استانداردسازی-متن-ورودی">استانداردسازی متن ورودی</h2>
 
 <p>این تابع، متن ورودی را با یکسان‌سازی حروف عربی و فارسی ، اصلاح نیم‌فاصله‌‌ها و فاصله‌ها، تبدیل به متن استاندارد می‌کند. در این تابع بیشتر از ۹۰۰ جایگزینی کاراکتر بر روی متن ووردی انجام می‌شود</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">NormalizePersianWord</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#ToDo: NormalizePersianWord python code</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">inputText</span> <span class="p">=</span> <span class="s">&#34;ولــے اگــر دڪــمــه مــڪــث رو لــمــس ڪــنــیــم ڪــلــا مــتــن چــنــدیــن صــفــحــه جــابــه جــا مــیــشــه و دیــگــه نــمــیــشــه فــهمــیــد ڪــدوم آیــه تــلــاوت مــی شود بــایــد چــے ڪــنــیــم؟.&#34;</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+    <span class="p">{</span>
+        <span class="n">Text</span> <span class="p">=</span> <span class="n">inputText</span><span class="p">,</span>
+        <span class="n">RefineQuotationPunc</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span>
+        <span class="n">RefineSeparatedAffix</span> <span class="p">=</span> <span class="k">true</span>
+    <span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">_baseAddress</span> <span class="p">+</span> <span class="s">&#34;PreProcessing/NormalizePersianWord&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: ولی اگر دکمه مکث رو لمس کنیم کلا متن چندین صفحه جابه جا میشه و دیگه نمیشه فهمید کدوم آیه تلاوت می‌شود باید چی کنیم؟.</p>
+</blockquote>
+
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/PreProcessing/NormalizePersianWord</code></p>
@@ -248,7 +184,31 @@
 <h2 id="شناسایی-مرز-جملات-ساده">شناسایی مرز جملات ساده</h2>
 
 <p>در این تابع شناسایی مرز جملات ساده/مرکب آن انجام می‌شود</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">SentenceSplitter</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#ToDo: SentenceSplitter python code</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">inputText</span> <span class="p">=</span> <span class="s">&#34;من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم&#34;</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+    <span class="p">{</span>
+        <span class="n">Text</span> <span class="p">=</span> <span class="n">inputText</span><span class="p">,</span>
+        <span class="n">Normalize</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>       <span class="c1">// نرمالسازی نیز انجام شود
+</span><span class="c1"></span>        <span class="n">NormalizerParams</span> <span class="p">=</span> <span class="k">new</span>  <span class="c1">// تنظیم پارامترهای نرمالسازی متن (اختیاری)
+</span><span class="c1"></span>        <span class="p">{</span>
+            <span class="n">Text</span> <span class="p">=</span> <span class="s">&#34;required but don&#39;t care :)&#34;</span><span class="p">,</span>
+            <span class="n">RefineQuotationPunc</span> <span class="p">=</span> <span class="k">false</span>
+        <span class="p">},</span>
+        <span class="n">CheckSlang</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">// عملیات تبدیل متن محاوره‌ای به رسمی نیز انجام شود
+</span><span class="c1"></span>        <span class="n">ComplexSentence</span> <span class="p">=</span> <span class="k">true</span>  <span class="c1">// جملات مرکب (غیرتودرتو) نیز جدا شوند
+</span><span class="c1"></span>    <span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;PreProcessing/SentenceSplitter&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;(</span><span class="n">resp</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: [&ldquo;من با دوستم به مدرسه می‌رفتیم&rdquo;,&ldquo;و در آنجا مشغول به تحصیل بودیم .&rdquo;,&ldquo;سپس به دانشگاه راه یافتیم&rdquo;]</p>
+</blockquote>
+
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-1">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/PreProcessing/SentenceSplitter</code></p>
@@ -300,7 +260,31 @@
 <h2 id="شناسایی-مرز-جملات-و-جداسازی-کلمات">شناسایی مرز جملات و جداسازی کلمات</h2>
 
 <p>در این تابع شناسایی مرز جملات ساده/مرکب و جداسازی کلمات (توکن‌ها) آن انجام می‌شود</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">SentenceSplitterAndTokenize</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#ToDo: SentenceSplitterAndTokenize python code</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">inputText</span> <span class="p">=</span> <span class="s">&#34;من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم&#34;</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+    <span class="p">{</span>
+        <span class="n">Text</span> <span class="p">=</span> <span class="n">inputText</span><span class="p">,</span>
+        <span class="n">Normalize</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>       <span class="c1">// نرمالسازی نیز انجام شود
+</span><span class="c1"></span>        <span class="n">NormalizerParams</span> <span class="p">=</span> <span class="k">new</span>  <span class="c1">// تنظیم پارامترهای نرمالسازی متن (اختیاری)
+</span><span class="c1"></span>        <span class="p">{</span>
+            <span class="n">Text</span> <span class="p">=</span> <span class="s">&#34;required but don&#39;t care :)&#34;</span><span class="p">,</span>
+            <span class="n">RefineQuotationPunc</span> <span class="p">=</span> <span class="k">false</span>
+        <span class="p">},</span>
+        <span class="n">CheckSlang</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">// عملیات تبدیل متن محاوره‌ای به رسمی نیز انجام شود
+</span><span class="c1"></span>        <span class="n">ComplexSentence</span> <span class="p">=</span> <span class="k">true</span>  <span class="c1">// جملات مرکب (غیرتودرتو) نیز جدا شوند
+</span><span class="c1"></span>    <span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;PreProcessing/SentenceSplitterAndTokenize&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;&gt;(</span><span class="n">resp</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: [[&ldquo;من&rdquo;,&ldquo;با&rdquo;,&ldquo;دوستم&rdquo;,&ldquo;به&rdquo;,&ldquo;مدرسه&rdquo;,&ldquo;می‌رفتیم&rdquo;],[&ldquo;و&rdquo;,&ldquo;در&rdquo;,&ldquo;آنجا&rdquo;,&ldquo;مشغول&rdquo;,&ldquo;به&rdquo;,&ldquo;تحصیل&rdquo;,&ldquo;بودیم&rdquo;,&ldquo;.&rdquo;],[&ldquo;سپس&rdquo;,&ldquo;به&rdquo;,&ldquo;دانشگاه&rdquo;,&ldquo;راه&rdquo;,&ldquo;یافتیم&rdquo;]]</p>
+</blockquote>
+
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-2">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/PreProcessing/SentenceSplitterAndTokenize</code></p>
@@ -352,7 +336,20 @@
 <h2 id="جداسازی-توکن-های-متن">جداسازی توکن‌های متن</h2>
 
 <p>در این تابع شناسایی مرز جملات ساده/مرکب آن انجام می‌شود</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">Tokenize</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#ToDo: Tokenize python code</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">inputText</span> <span class="p">=</span> <span class="s">&#34;من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم... سپس به دانشگاه راه یافتیم&#34;</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="n">inputText</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;PreProcessing/Tokenize&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;(</span><span class="n">resp</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: [&ldquo;من&rdquo;,&ldquo;با&rdquo;,&ldquo;دوستم&rdquo;,&ldquo;به&rdquo;,&ldquo;مدرسه&rdquo;,&ldquo;می&rdquo;,&ldquo;رفتیم&rdquo;,&ldquo;و&rdquo;,&ldquo;در&rdquo;,&ldquo;آنجا&rdquo;,&ldquo;مشغول&rdquo;,&ldquo;به&rdquo;,&ldquo;تحصیل&rdquo;,&ldquo;بودیم&rdquo;,&ldquo;&hellip;&rdquo;,&ldquo;سپس&rdquo;,&ldquo;به&rdquo;,&ldquo;دانشگاه&rdquo;,&ldquo;راه&rdquo;,&ldquo;یافتیم&rdquo;]</p>
+</blockquote>
+
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-3">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/PreProcessing/Tokenize</code></p>
@@ -382,30 +379,22 @@
 <h2 id="اصلاح-اشتباهات-تایپی">اصلاح اشتباهات تایپی</h2>
 
 <p>این تابع وب سرویس، اشتباهات تایپی را بر اساس لیست کلمات خود اصلاح می‌کند و کلمه درست را برمی‌گرداند. این تابع مانند همه توابع دیگر نیاز به توکن JWT برای احراز هویت دارد</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
 
+<span class="kt">string</span> <span class="n">inputText</span> <span class="p">=</span> <span class="s">@&#34;فهوه با مبات میجسبد&#34;</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+<span class="p">{</span>
+    <span class="n">Text</span> <span class="p">=</span> <span class="n">inputText</span><span class="p">,</span>
+    <span class="n">Normalize</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>
+    <span class="n">CandidateCount</span> <span class="p">=</span> <span class="m">3</span>
+<span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextRefinement/SpellCorrector&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
 <blockquote>
-<p>به جای <code>TOKEN_VALUE</code> باید از توکن دریافتی تابع احراز هویت استفاده کنید</p>
-</blockquote>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">client</span><span class="p">=</span><span class="k">new</span> <span class="n">RestClinet</span><span class="p">(</span><span class="s">&#34;https://api.text-mining.ir/api/PreProcessing/SpellCorrectors&#34;</span><span class="p">);</span>
-<span class="kt">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RestRequest</span><span class="p">(</span><span class="n">Method</span><span class="p">.</span><span class="n">POST</span><span class="p">);</span>
-<span class="n">request</span><span class="p">.</span><span class="n">AddHeader</span><span class="p">(</span><span class="s">&#34;Cache-Control&#34;</span><span class="p">,</span><span class="s">&#34;no-cache&#34;</span><span class="p">);</span>
-<span class="n">request</span><span class="p">.</span><span class="n">AddHeader</span><span class="p">(</span><span class="s">&#34;Authorization&#34;</span><span class="p">,</span><span class="s">&#34;TOKEN_VALUE&#34;</span><span class="p">);</span>
-<span class="n">request</span><span class="p">.</span><span class="n">AddHeader</span><span class="p">(</span><span class="s">&#34;Content-Type&#34;</span><span class="p">,</span><span class="s">&#34;application/json&#34;</span><span class="p">);</span>
-<span class="n">request</span><span class="p">.</span><span class="n">AddParameter</span><span class="p">(</span><span class="s">&#34;input&#34;</span><span class="p">,</span> <span class="s">$&#34;\&#34;</span><span class="p">{</span><span class="n">inputText</span><span class="p">}</span><span class="err">\</span><span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">ParameterType</span><span class="p">.</span><span class="n">RequestBody</span><span class="p">);</span>
-<span class="n">IRestResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;https://api.text-mining.ir/api/PreProcessing/SpellCorrector&#34;</span>
-
-<span class="n">payload</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\&#34;</span><span class="s2">inputText</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s2">&#34;application/json&#34;</span><span class="p">,</span>
-    <span class="s1">&#39;Cache-Control&#39;</span><span class="p">:</span> <span class="s2">&#34;no-cache&#34;</span>
-    <span class="p">}</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span></code></pre></div>
-<blockquote>
-<p>به جای <code>inputText</code> متن ورودی خود را قرار دهید مثلاً <code>شلام</code></p>
+<p>خروجی مثال کد بالا: قهوه با {نبات,ملات,مباد} {می‌چسبد,می‌جنبد}</p>
 </blockquote>
 
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-4">آدرس و نوع تابع وب‌سرویس</h3>
@@ -433,7 +422,27 @@
 <h2 id="تبدیل-محاوره-به-رسمی">تبدیل محاوره به رسمی</h2>
 
 <p>کلمات محاوره‌ای درون متن به شکل (معادل) رسمی آنها تبدیل می‌شود</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">FormalConverter</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#ToDo: FormalConverter python code</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">inputText</span> <span class="p">=</span> <span class="s">@&#34;اگه اون گزینه رو کلیک کنین، یه پنجره باز میشه که میتونین رمز عبورتون رو اونجا تغییر بدین
+</span><span class="s">    داشتم مي رفتم برم، ديدم گرفت نشست، گفتم بذار بپرسم ببينم مياد نمياد ديدم ميگه نميخوام بيام بذار برم بگيرم بخوابم نمیتونم بشینم.
+</span><span class="s">    کتابای خودتونه
+</span><span class="s">    نمیدونم چی بگم که دیگه اونجا نره
+</span><span class="s">    ساعت چن میتونین بیایین؟&#34;</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="n">inputText</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextRefinement/FormalConverter&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: اگر آن گزینه را کلیک کنید، یک پنجره باز می‌شود که می‌توانید رمز عبورتان را آنجا تغییر بدهید
+داشتم می‌رفتم بروم، دیدم گرفت نشست، گفتم بگذار بپرسم ببینم می‌آید نمی‌آید دیدم می‌گوید نمی‌خواهم بیایم بگذار بروم بگیرم بخوابم نمی‌توانم بنشینم.
+کتاب‌های خودتان است
+نمی‌دانم چه بگویم که دیگر آنجا نرود
+ساعت چند می‌توانید بیایید؟</p>
+</blockquote>
+
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-5">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/TextRefinement/FormalConverter</code></p>
@@ -461,7 +470,20 @@
 <h2 id="تشخیص-کلمات-رکیک-و-ناسزا">تشخیص کلمات رکیک و ناسزا</h2>
 
 <p>این تابع کلمات زشت/ناسزا (در دو سطح از اهانت) را تشخیص و تعیین میکند</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">SwearWordTagger</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#ToDo: SwearWordTagger python code</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">inputText</span> <span class="p">=</span> <span class="s">&#34;خـــــــرررررهای دیووووونههه  -   صکس  س.ک.س ی  \r\n بیپدرومادر&#34;</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="n">inputText</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextRefinement/SwearWordTagger&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;&gt;(</span><span class="n">resp</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: {&ldquo;خرررررهای&rdquo;:&ldquo;MildSwearWord&rdquo;,&ldquo;دیووووونههه&rdquo;:&ldquo;MildSwearWord&rdquo;,&ldquo;صکس&rdquo;:&ldquo;StrongSwearWord&rdquo;,&ldquo;س.ک.س&rdquo;:&ldquo;StrongSwearWord&rdquo;,&ldquo;بیپدرومادر&rdquo;:&ldquo;StrongSwearWord&rdquo;}</p>
+</blockquote>
+
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-6">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/TextRefinement/SwearWordTagger</code></p>
@@ -492,7 +514,7 @@
 
 <p>این تابع حدود ۶۰ نوع زبان را برای متن ورودی شناسایی کند
 <a href="https://iso639-3.sil.org/code_tables/639/data/all">https://iso639-3.sil.org/code_tables/639/data/all</a></p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">Predict</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#ToDo: Predict python code</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">Predict</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div>
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-7">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/LanguageDetection/Predict</code></p>
@@ -536,7 +558,25 @@
 <li>B-EVE - شروع موجودیت رویداد یا حادثه</li>
 <li>I-EVE - ادامه موجودیت رویداد یا حادثه</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="p">//</span><span class="n">ToDo</span><span class="p">:</span> <span class="n">NamedEntityRecognitionDetect</span> <span class="n">c</span><span class="err">#</span> <span class="n">code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#ToDo: NamedEntityRecognitionDetect python code</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">inputText</span> <span class="p">=</span> <span class="s">&#34;احمد عباسی به تحصیلات خود در دانشگاه آزاد اسلامی در مشهد ادامه داد&#34;</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;NamedEntityRecognition/Detect&#34;</span><span class="p">,</span>
+                    <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="n">inputText</span><span class="p">),</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+
+<span class="c1">// parse and generate result:
+</span><span class="c1"></span><span class="n">JArray</span> <span class="n">tokens</span> <span class="p">=</span> <span class="n">JArray</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="n">JObject</span> <span class="n">token</span> <span class="k">in</span> <span class="n">tokens</span><span class="p">.</span><span class="n">Children</span><span class="p">&lt;</span><span class="n">JObject</span><span class="p">&gt;())</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">$&#34;{{{token[&#34;</span><span class="n">word</span><span class="s">&#34;]},{token[&#34;</span><span class="n">tags</span><span class="s">&#34;][&#34;</span><span class="n">NER</span><span class="s">&#34;][&#34;</span><span class="n">item1</span><span class="s">&#34;]}}}&#34;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: {احمد,B-PER} {عباسی,I-PER} {به,O} {تحصیلات,O} {خود,O} {در,O} {دانشگاه,B-ORG} {آزاد,I-ORG} {اسلامی,I-ORG} {در,O} {مشهد,I-LOC} {ادامه,O} {داد,O}</p>
+</blockquote>
+
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-8">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/NamedEntityRecognition/Detect</code></p>
@@ -557,6 +597,641 @@
 <td>inputText</td>
 <td></td>
 <td>متن ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="نقش-کلمات-متون">نقش کلمات متون</h1>
+
+<h2 id="تعیین-برچسب-نقش-ادات-سخن">تعیین برچسب نقش ادات سخن</h2>
+
+<p>این تابع عملیات برچسب زنی نقش (اسم، ضمیر، صفت، قید، فعل، &hellip;) کلمات در جمله را انجام می دهد.</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">inputText</span> <span class="p">=</span> <span class="s">&#34;احمد و علی به مدرسه پایین خیابان می رفتند.&#34;</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;PosTagger/GetPos&#34;</span><span class="p">,</span>
+                    <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="n">inputText</span><span class="p">),</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+
+<span class="c1">// parse and generate result:
+</span><span class="c1"></span><span class="n">JArray</span> <span class="n">tokens</span> <span class="p">=</span> <span class="n">JArray</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="n">JObject</span> <span class="n">token</span> <span class="k">in</span> <span class="n">tokens</span><span class="p">.</span><span class="n">Children</span><span class="p">&lt;</span><span class="n">JObject</span><span class="p">&gt;())</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">$&#34;{{{token[&#34;</span><span class="n">word</span><span class="s">&#34;]},{token[&#34;</span><span class="n">tags</span><span class="s">&#34;][&#34;</span><span class="n">POS</span><span class="s">&#34;][&#34;</span><span class="n">item1</span><span class="s">&#34;]}}}&#34;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: {احمد,N} {و,CON} {علی,N} {به,P} {مدرسه,N} {پایین,ADJ} {خیابان,N} {می‌رفتند,V} {.,DELM}</p>
+</blockquote>
+
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-9">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/PosTagger/GetPos</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-9">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>text</td>
+<td></td>
+<td>متن ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="ریشه-یابی-متون">ریشه‌یابی متون</h1>
+
+<h2 id="ریشه-یابی-عبارات">ریشه‌یابی عبارات</h2>
+
+<p>از این تابع برای ریشه‌یابی عبارات استفاده می‌شود.
+به عنوان مثال، خروجی متن کد نمونه به شکل زیر است</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+<span class="p">{</span>
+    <span class="n">Phrases</span> <span class="p">=</span> <span class="k">new</span><span class="na">[]</span>
+    <span class="p">{</span>
+        <span class="k">new</span> <span class="p">{</span> <span class="n">Word</span> <span class="p">=</span> <span class="s">&#34;دریانوردانی&#34;</span> <span class="p">},</span>
+        <span class="k">new</span> <span class="p">{</span> <span class="n">Word</span> <span class="p">=</span> <span class="s">&#34;فرشتگان&#34;</span> <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">CheckSlang</span> <span class="p">=</span> <span class="k">false</span>
+<span class="p">});</span>
+
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;Stemmer/LemmatizePhrase2Phrase&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-10">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/Stemmer/LemmatizePhrase2Phrase</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-10">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>CheckSlang</td>
+<td></td>
+<td>آیا در حین ریشه یابی کلمات محاوره‌ای تحلیل و به شکل رسمی تبدیل شوند</td>
+</tr>
+
+<tr>
+<td>ComplexSentence</td>
+<td></td>
+<td>آیا بخش‌های جملات مرکب غیرتودرتو جداسازی شوند</td>
+</tr>
+
+<tr>
+<td>Phrases</td>
+<td></td>
+<td>ورودی به شکل لیست عبارات</td>
+</tr>
+
+<tr>
+<td>Text</td>
+<td></td>
+<td>ورودی به شکل متن</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="ریشه-یابی-متن">ریشه یابی متن</h2>
+
+<p>برای نمایش ریشه افعال شکل گذشته ساده درنظر گرفته میشود و سایر اطلاعات صرفی فعل در متغیر ذیل وجود دارد:
+verbInformation</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+<span class="p">{</span>
+<span class="n">Text</span> <span class="p">=</span> <span class="s">&#34;دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.&#34;</span><span class="p">,</span>
+<span class="n">CheckSlang</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span> <span class="c1">// بررسی و تبدیل کلمات محاوره ای به شکل رسمی انجام نشود
+</span><span class="c1"></span><span class="n">ComplexSentence</span> <span class="p">=</span> <span class="k">false</span> <span class="c1">// شکستن جملات مرکب به چند جمله
+</span><span class="c1"></span><span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;Stemmer/LemmatizeText2Phrase&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="n">JArray</span> <span class="n">tokens</span> <span class="p">=</span> <span class="n">JArray</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="n">JObject</span> <span class="n">token</span> <span class="k">in</span> <span class="n">tokens</span><span class="p">.</span><span class="n">Children</span><span class="p">&lt;</span><span class="n">JObject</span><span class="p">&gt;())</span>
+<span class="p">{</span>
+<span class="n">result</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="err">\</span><span class="s">$&#34;{{{token[&#34;</span><span class="n">word</span><span class="s">&#34;]},[&#34;</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">root</span> <span class="k">in</span> <span class="n">token</span><span class="na">[&#34;rootWords&#34;]</span><span class="p">.</span><span class="n">Children</span><span class="p">&lt;</span><span class="n">JValue</span><span class="p">&gt;())</span>
+<span class="n">result</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">Value</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;()).</span><span class="n">Append</span><span class="p">(</span><span class="sc">&#39;,&#39;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="na">[result.Length - 1]</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="sc">&#39;,&#39;</span><span class="p">))</span>
+<span class="n">result</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">Length</span> <span class="p">-</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
+<span class="n">result</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">&#34;]}&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span></code></pre></div>
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-11">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/Stemmer/LemmatizeText2Phrase</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-11">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>CheckSlang</td>
+<td></td>
+<td>آیا در حین ریشه یابی کلمات محاوره‌ای تحلیل و به شکل رسمی تبدیل شوند</td>
+</tr>
+
+<tr>
+<td>ComplexSentence</td>
+<td></td>
+<td>آیا بخش‌های جملات مرکب غیرتودرتو جداسازی شوند</td>
+</tr>
+
+<tr>
+<td>Phrases</td>
+<td></td>
+<td>ورودی به شکل لیست عبارات</td>
+</tr>
+
+<tr>
+<td>Text</td>
+<td></td>
+<td>ورودی به شکل متن</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="ریشه-یابی-یک-متن">ریشه‌یابی یک متن</h2>
+
+<p>متن بهمراه کلمات ریشه (افعال به سوم شخص گذشته ساده تبدیل میشوند)</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="s">&#34;دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.&#34;</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;Stemmer/LemmatizeText2Text&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: دانشجو زیاد به مدرسه استعداد درخشان راه پیدا نکرد که با مشکل بعد مواجه شد.</p>
+</blockquote>
+
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-12">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/Stemmer/LemmatizeText2Text</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-12">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>inputText</td>
+<td></td>
+<td>ورودی به شکل متن</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="ریشه-یابی-لیست-کلمات-ورودی">ریشه‌یابی لیست کلمات ورودی</h2>
+
+<p>لیستی از کلمات ورودی را ریشه‌یابی می‌کند.</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span><span class="na">[]</span> <span class="p">{</span> <span class="s">&#34;مشاجرات&#34;</span><span class="p">,</span> <span class="s">&#34;دریانوردانی&#34;</span><span class="p">,</span> <span class="s">&#34;جزایر&#34;</span><span class="p">,</span> <span class="s">&#34;فرشتگان&#34;</span><span class="p">,</span> <span class="s">&#34;تنها&#34;</span> <span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;Stemmer/LemmatizeWords2Phrase&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-13">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/Stemmer/LemmatizeWords2Phrase</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-13">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>words</td>
+<td></td>
+<td>آرایه‌ای از کلمات در قالب رشته</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="شباهت-متون">شباهت متون</h1>
+
+<h2 id="استخراج-مترادف-ها">استخراج مترادف‌ها</h2>
+
+<p>این تابع کلمات هم‌معنی (معادل مفهومی) با کلمه ورودی در فرهنگ لغت‌های مختلف را برمی‌گرداند</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="s">&#34;احسان&#34;</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/ExtractSynonyms&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="kt">string</span><span class="na">[]</span><span class="p">&gt;(</span><span class="n">resp</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: [&ldquo;احسان&rdquo;,&ldquo;نیکی کردن&rdquo;,&ldquo;نیکوکاری&rdquo;,&ldquo;بخشش&rdquo;,&ldquo;نیکی&rdquo;,&ldquo;خوبی&rdquo;,&ldquo;نیکویی&rdquo;,&ldquo;انعام&rdquo;,&ldquo;نکویی&rdquo;,&ldquo;اکرام&rdquo;,&ldquo;صنع&rdquo;,&ldquo;فضل&rdquo;,&ldquo;لطف&rdquo;,&ldquo;منت&rdquo;,&ldquo;نزل&rdquo;,&ldquo;نعمت&rdquo;,&ldquo;نیکی<em>کردن&rdquo;,&ldquo;احسان (نام)&rdquo;,&ldquo;احسان</em>(نام)&ldquo;]</p>
+</blockquote>
+
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-14">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/TextSimilarity/ExtractSynonyms</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-14">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>word</td>
+<td></td>
+<td>کلمه ورودی در قالب رشته</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="محاسبه-فاصله-کاراکتری-کلمات">محاسبه فاصله (کاراکتری) کلمات</h2>
+
+<p>این تابع میزان فاصله براساس کارکترهای مشابه را محاسبه میکند
+دقت شود که شباهت با فاصله رابطه عکس دارد</p>
+
+<p>Similarity = 1 - Distance</p>
+
+<p>نحوه محاسبه بر اساس موارد زیر است</p>
+
+<ul>
+<li>HammingDistance (1)</li>
+<li>JaccardDistance (2)</li>
+<li>JaroDistance (4)</li>
+<li>JaroWinklerDistance (8)</li>
+<li>LevenshteinDistance (16)</li>
+<li>LongestCommonSubsequence (32)</li>
+<li>LongestCommonSubstring (64)</li>
+<li>NormalizedLevenshteinDistance (128)</li>
+<li>OverlapCoefficient (256)</li>
+<li>RatcliffObershelpSimilarity (512)</li>
+<li>SorensenDiceDistance (1024)</li>
+<li>TanimotoCoefficient (2048)</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+<span class="p">{</span>
+    <span class="n">String1</span> <span class="p">=</span> <span class="s">&#34;ایرانی ها&#34;</span><span class="p">,</span>
+    <span class="n">String2</span> <span class="p">=</span> <span class="s">&#34;ایرانیان&#34;</span><span class="p">,</span>
+    <span class="n">DistanceFunc</span> <span class="p">=</span> <span class="m">2</span>         <span class="c1">// JaccardDistance
+</span><span class="c1"></span><span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/GetSyntacticDistance&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">similarity</span> <span class="p">=</span> <span class="m">1.0</span> <span class="p">-</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: 0.333333343</p>
+</blockquote>
+
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-15">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/TextSimilarity/GetSyntacticDistance</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-15">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>DistanceFunc</td>
+<td></td>
+<td>نحوه محاسبه شباهت (کاراکتری) دو رشته</td>
+</tr>
+
+<tr>
+<td>inDistThreshold</td>
+<td></td>
+<td>حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها</td>
+</tr>
+
+<tr>
+<td>String1</td>
+<td></td>
+<td>کلمه یا رشته ورودی اول</td>
+</tr>
+
+<tr>
+<td>String2</td>
+<td></td>
+<td>کلمه یا رشته ورودی دوم</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="محاسبه-شباهت-براساس-کلمات-مشابه">محاسبه شباهت براساس کلمات مشابه</h2>
+
+<p>این تابع میزان شباهت را برمی‌گرداند</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+<span class="p">{</span>
+    <span class="n">String1</span> <span class="p">=</span> <span class="s">&#34;حمله مغولها به ایران&#34;</span><span class="p">,</span>
+    <span class="n">String2</span> <span class="p">=</span> <span class="s">&#34;حملات مغولان به ایران&#34;</span><span class="p">,</span>
+    <span class="n">DistanceFunc</span> <span class="p">=</span> <span class="m">2</span>             <span class="c1">// JaccardDistance
+</span><span class="c1"></span><span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/SentenceSimilarityBipartiteMatching&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">distance</span> <span class="p">=</span> <span class="m">1.0</span> <span class="p">-</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: 0.80357146263122559</p>
+</blockquote>
+
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-16">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityBipartiteMatching</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-16">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>DistanceFunc</td>
+<td></td>
+<td>نحوه محاسبه شباهت (کاراکتری) دو رشته</td>
+</tr>
+
+<tr>
+<td>inDistThreshold</td>
+<td></td>
+<td>حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها</td>
+</tr>
+
+<tr>
+<td>String1</td>
+<td></td>
+<td>کلمه یا رشته ورودی اول</td>
+</tr>
+
+<tr>
+<td>String2</td>
+<td></td>
+<td>کلمه یا رشته ورودی دوم</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="محاسبه-شباهت-براساس-اشتراک-کلمات">محاسبه شباهت براساس اشتراک کلمات</h2>
+
+<p>این تابع میزان شباهت را برمی‌گرداند</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+<span class="p">{</span>
+    <span class="n">String1</span> <span class="p">=</span> <span class="s">&#34;حمله مغولها به ایران&#34;</span><span class="p">,</span>
+    <span class="n">String2</span> <span class="p">=</span> <span class="s">&#34;حملات مغولان به ایران&#34;</span><span class="p">,</span>
+    <span class="n">DistanceFunc</span> <span class="p">=</span> <span class="m">2</span><span class="p">,</span>             <span class="c1">// JaccardDistance
+</span><span class="c1"></span>    <span class="n">MinDistThreshold</span> <span class="p">=</span> <span class="m">0.3</span>        <span class="c1">//حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها
+</span><span class="c1"></span><span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/SentenceSimilarityWithIntersectionMatching&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">distance</span> <span class="p">=</span> <span class="m">1.0</span> <span class="p">-</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: 0.75</p>
+</blockquote>
+
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-17">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithIntersectionMatching</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-17">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>DistanceFunc</td>
+<td></td>
+<td>نحوه محاسبه شباهت (کاراکتری) دو رشته</td>
+</tr>
+
+<tr>
+<td>inDistThreshold</td>
+<td></td>
+<td>حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها</td>
+</tr>
+
+<tr>
+<td>String1</td>
+<td></td>
+<td>کلمه یا رشته ورودی اول</td>
+</tr>
+
+<tr>
+<td>String2</td>
+<td></td>
+<td>کلمه یا رشته ورودی دوم</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="محاسبه-شباهت-دو-جمله">محاسبه شباهت دو جمله</h2>
+
+<p>این تابع میزان شباهت را برمی‌گرداند و همچنین این تابع دارای سرعت (کارایی) بالا و مناسب برای حجم بالای متون است</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+<span class="p">{</span>
+    <span class="n">String1</span> <span class="p">=</span> <span class="s">&#34;حمله مغولها به ایران&#34;</span><span class="p">,</span>
+    <span class="n">String2</span> <span class="p">=</span> <span class="s">&#34;حملات مغولان به ایران&#34;</span>
+<span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/SentenceSimilarityWithNearDuplicateDetector&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">distance</span> <span class="p">=</span> <span class="m">1.0</span> <span class="p">-</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: 0.5</p>
+</blockquote>
+
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-18">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithNearDuplicateDetector</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-18">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>DistanceFunc</td>
+<td></td>
+<td>نحوه محاسبه شباهت (کاراکتری) دو رشته</td>
+</tr>
+
+<tr>
+<td>inDistThreshold</td>
+<td></td>
+<td>حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها</td>
+</tr>
+
+<tr>
+<td>String1</td>
+<td></td>
+<td>کلمه یا رشته ورودی اول</td>
+</tr>
+
+<tr>
+<td>String2</td>
+<td></td>
+<td>کلمه یا رشته ورودی دوم</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="محاسبه-شباهت-براساس-تعداد-کلمات-مشابه-پشت-سرهم">محاسبه شباهت براساس تعداد کلمات مشابه پشت سرهم</h2>
+
+<p>این تابع میزان شباهت را برمی‌گرداند</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">string</span> <span class="n">baseAddress</span> <span class="p">=</span> <span class="s">&#34;https://api.text-mining.ir/api/&#34;</span><span class="p">;</span>
+<span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">&#34;Bearer&#34;</span><span class="p">,</span> <span class="n">GetJWTToken</span><span class="p">());</span>
+
+<span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span>
+<span class="p">{</span>
+    <span class="n">String1</span> <span class="p">=</span> <span class="s">&#34;حمله مغولها به ایران&#34;</span><span class="p">,</span>
+    <span class="n">String2</span> <span class="p">=</span> <span class="s">&#34;حملات مغولان به ایران&#34;</span><span class="p">,</span>
+    <span class="n">DistanceFunc</span> <span class="p">=</span> <span class="m">2</span><span class="p">,</span>             <span class="c1">// JaccardDistance
+</span><span class="c1"></span>    <span class="n">MinDistThreshold</span> <span class="p">=</span> <span class="m">0.3</span>        <span class="c1">//حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها
+</span><span class="c1"></span><span class="p">});</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/SentenceSimilarityWithNGramMatching&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">distance</span> <span class="p">=</span> <span class="m">1.0</span> <span class="p">-</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<blockquote>
+<p>خروجی مثال کد بالا: 0.714285708963871</p>
+</blockquote>
+
+<h3 id="آدرس-و-نوع-تابع-وب-سرویس-19">آدرس و نوع تابع وب‌سرویس</h3>
+
+<p><code>POST https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithNGramMatching</code></p>
+
+<h3 id="مدل-دریافتی-به-عنوان-پارامتر-19">مدل دریافتی به عنوان پارامتر</h3>
+
+<table>
+<thead>
+<tr>
+<th>عنوان</th>
+<th>مقدار پیش‌فرض</th>
+<th>توضیح پارامتر</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>DistanceFunc</td>
+<td></td>
+<td>نحوه محاسبه شباهت (کاراکتری) دو رشته</td>
+</tr>
+
+<tr>
+<td>inDistThreshold</td>
+<td></td>
+<td>حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها</td>
+</tr>
+
+<tr>
+<td>String1</td>
+<td></td>
+<td>کلمه یا رشته ورودی اول</td>
+</tr>
+
+<tr>
+<td>String2</td>
+<td></td>
+<td>کلمه یا رشته ورودی دوم</td>
 </tr>
 </tbody>
 </table>
@@ -611,16 +1286,6 @@
             <div class="lang-selector">
                 
                 <a href="#" data-language-name="csharp">C#</a>
-                
-                <a href="#" data-language-name="python">Python</a>
-                
-                <a href="#" data-language-name="go">Go</a>
-                
-                <a href="#" data-language-name="js">NodeJS</a>
-                
-                <a href="#" data-language-name="php">PHP</a>
-                
-                <a href="#" data-language-name="javascript">Javascript</a>
                 
             </div>
             
