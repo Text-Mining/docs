@@ -820,3 +820,38 @@ Console.WriteLine(resp);
 | inDistThreshold |               | حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها |
 | String1         |               | کلمه یا رشته ورودی اول                                 |
 | String2         |               | کلمه یا رشته ورودی دوم                                 |
+
+# تحلیل جملات
+
+## تحلیل حسی (نسخه آزمایشی)
+
+این تابع نوع حس جمله را به صورت یکی از سه شکل زیر برمی‌گرداند
+
+- 0 Negative (منفی)
+- 1 Neutral (خنثی)
+- 2 Positive (مثبت)
+
+```csharp
+
+string baseAddress = "https://api.text-mining.ir/api/";
+HttpClient client = new HttpClient();
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetJWTToken());
+
+string json = JsonConvert.SerializeObject("اصلا خوب نبود");
+var response = client.PostAsync(baseAddress + "SentimentAnalyzer/SentimentClassifier", new StringContent(json, Encoding.UTF8, "application/json")).Result;
+string resp = response.Content.ReadAsStringAsync().Result;
+Console.WriteLine(resp);
+
+```
+
+> خروجی مثال کد بالا: 0
+
+### آدرس و نوع تابع وب‌سرویس
+
+`POST https://api.text-mining.ir/api/SentimentAnalyzer/SentimentClassifier`
+
+### مدل دریافتی به عنوان پارامتر
+
+| عنوان     | مقدار پیش‌فرض | توضیح پارامتر |
+| --------- | ------------- | ------------- |
+| inputText |               | متن ورودی     |
