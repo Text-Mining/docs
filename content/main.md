@@ -328,9 +328,18 @@ Console.WriteLine(resp);
 
 ```csharp
 
-//ToDo: Predict c# code
+string baseAddress = "https://api.text-mining.ir/api/";
+HttpClient client = new HttpClient();
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetJWTToken());
+
+string json = JsonConvert.SerializeObject("شام ییبسن یا یوخ. سن سیز بوغازیمنان گتمیر شام. به به نه قشه یردی. ساغ اول سیز نئجه سیز. نئجه سن؟ اوشاقلار نئجه دیر؟ سلام لاری وار سیزین کی لر نئجه دیر. یاخچی");
+var response = client.PostAsync(baseAddress + "LanguageDetection/Predict", new StringContent(json, Encoding.UTF8, "application/json")).Result;
+string resp = response.Content.ReadAsStringAsync().Result;
+Console.WriteLine(resp);
 
 ```
+
+> خروجی مثال کد بالا: azb
 
 ### آدرس و نوع تابع وب‌سرویس
 
