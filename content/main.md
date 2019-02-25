@@ -219,6 +219,41 @@ Console.WriteLine(resp);
 
 # بهبود متون
 
+## پیشنهاد کلمات صحیح با توجه به زمینه
+
+این تابع اشتباهات تایپی/املایی متن ورودی با توجه به محتوای جمله اصلاح میکند
+
+```csharp
+string baseAddress = "https://api.text-mining.ir/api/";
+HttpClient client = new HttpClient();
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetJWTToken());
+
+string inputText = @"ستر حیوانی است که در صحرا با مقدار کم آب زندگی میکند";
+string json = JsonConvert.SerializeObject(new
+{
+    Text = inputText,
+    Normalize = true,
+    CandidateCount = 3
+});
+var response = client.PostAsync(baseAddress + "TextRefinement/SpellCorrectorInContext", new StringContent(json, Encoding.UTF8, "application/json")).Result;
+string resp = response.Content.ReadAsStringAsync().Result;
+Console.WriteLine(resp);
+```
+
+> خروجی مثال کد بالا: {شتر,سطر,سفر} {حیوانی,حیوان,یونانی} {است,دست,هست} که در {صحرا,صفرا,صدرا} با {مقدار,مدار,مقدر} کم آب {زندگی,بندگی,زدگی} {می‌کند,می‌کند,مکند}
+
+### آدرس و نوع تابع وب‌سرویس
+
+`POST https://api.text-mining.ir/api/TextRefinement/SpellCorrectorInContext`
+
+### مدل دریافتی به عنوان پارامتر
+
+| عنوان          | توضیح پارامتر                                                 |
+| -------------- | ------------------------------------------------------------- |
+| CandidateCount | تعداد کلمات کاندید برای جایگزین کردن با کلمه ناآشنای درون متن |
+| Normalize      | آیا نرمالسازی متن نیز انجام شود                               |
+| Text           | متن ورودی                                                     |
+
 ## اصلاح اشتباهات تایپی
 
 این تابع وب سرویس، اشتباهات تایپی را بر اساس لیست کلمات خود اصلاح می‌کند و کلمه درست را برمی‌گرداند. این تابع مانند همه توابع دیگر نیاز به توکن JWT برای احراز هویت دارد
@@ -244,7 +279,7 @@ Console.WriteLine(resp);
 
 ### آدرس و نوع تابع وب‌سرویس
 
-`POST https://api.text-mining.ir/api/PreProcessing/SpellCorrectors`
+`POST https://api.text-mining.ir/api/TextRefinement/SpellCorrectors`
 
 ### مدل دریافتی به عنوان پارامتر
 
