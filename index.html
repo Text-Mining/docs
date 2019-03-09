@@ -17,7 +17,7 @@
 
     
 </head>
-<body class="index" data-languages="[ &#34;csharp&#34; ]">
+<body class="index" data-languages="[ &#34;csharp&#34; ,  &#34;python&#34; ]">
     <a href="#" id="nav-button">
         <span>
         NAV
@@ -31,6 +31,8 @@
         <div class="lang-selector">
             
             <a href="#" data-language-name="csharp">C#</a>
+            
+            <a href="#" data-language-name="python">Python</a>
             
         </div>
          
@@ -70,7 +72,8 @@
 
 <p>متن‌کاوی، مجموعه‌ای از خدمات ‌آنلاین مربوط به پردازش متون فارسی را در قالب Rest API در اختیار برنامه‌نویسان قرار می‌دهد.</p>
 
-<p><strong>توجه: برای استفاده از هر یک از امکانات وب سرویس متن‌کاوی باید کلید API داشته باشید</strong></p>
+<p><strong>توجه: برای استفاده از هر یک از امکانات وب سرویس متن‌کاوی باید کلید API داشته باشید</strong>
+همچنین برای جلوگیری از تکرار در نمونه کد بعضی از زبان‌ها مانند پایتون، بعضی از توابع پایه‌ای مثل تابع فراخوانی Rest API یا دریافت توکن تنها یک بار اضافه شده‌اند</p>
 
 <aside class="success">
 لیست کامل توابع API در قالب <code>swagger</code> در <a href="https://api.text-mining.ir">https://api.text-mining.ir</a> در دسترس است
@@ -92,7 +95,26 @@
         <span class="n">jwtToken</span> <span class="p">=</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="n">JObject</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="na">[&#34;token&#34;]</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">jwtToken</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">):</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s2">&#34;application/json&#34;</span><span class="p">,</span>
+        <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="s2">&#34;Bearer &#34;</span> <span class="o">+</span> <span class="n">tokenKey</span><span class="p">,</span>
+        <span class="s1">&#39;Cache-Control&#39;</span><span class="p">:</span> <span class="s2">&#34;no-cache&#34;</span>
+    <span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&#34;utf-8&#34;</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+<span class="c1">##################### Get Token by Api Key ##########################</span>
+
+<span class="n">baseUrl</span> <span class="o">=</span> <span class="s2">&#34;http://api.text-mining.ir/api/&#34;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;Token/GetToken&#34;</span>
+<span class="n">querystring</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;apikey&#34;</span><span class="p">:</span><span class="s2">&#34;YOUR_API_KEY&#34;</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">querystring</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">tokenKey</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span></code></pre></div>
 <blockquote>
 <p>در صورت موفق بودن درخواست، خروجی شبیه زیر برگردانده می‌شود که <code>TOKEN_VALUE</code> همان توکن احراز هویت شماست.</p>
 </blockquote>
@@ -128,7 +150,12 @@
     <span class="p">});</span>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">_baseAddress</span> <span class="p">+</span> <span class="s">&#34;PreProcessing/NormalizePersianWord&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">######################## Call Normalizer ############################</span>
+
+<span class="n">baseUrl</span> <span class="o">=</span> <span class="s2">&#34;http://api.text-mining.ir/api/&#34;</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;PreProcessing/NormalizePersianWord&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&#34;{</span><span class="se">\&#34;</span><span class="s2">text</span><span class="se">\&#34;</span><span class="s2">:</span><span class="se">\&#34;</span><span class="s2">ولــے اگــر دڪــمــه مــڪــث رو لــمــس ڪــنــیــم ڪــلــا مــتــن چــنــدیــن صــفــحــه جــابــه جــا مــیــشــه و دیــگــه نــمــیــشــه فــهمــیــد ڪــدوم آیــه تــلــاوت مــی شود بــایــد چــے ڪــنــیــم؟.</span><span class="se">\&#34;</span><span class="s2">, </span><span class="se">\&#34;</span><span class="s2">refineSeparatedAffix</span><span class="se">\&#34;</span><span class="s2">:true}&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: ولی اگر دکمه مکث رو لمس کنیم کلا متن چندین صفحه جابه جا میشه و دیگه نمیشه فهمید کدوم آیه تلاوت می‌شود باید چی کنیم؟.</p>
 </blockquote>
@@ -280,7 +307,21 @@
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;PreProcessing/SentenceSplitterAndTokenize&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;&gt;(</span><span class="n">resp</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">############# Call Sentence Splitter and Tokenizer #################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;PreProcessing/SentenceSplitterAndTokenize&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;{</span><span class="se">\&#34;</span><span class="s1">text</span><span class="se">\&#34;</span><span class="s1">: </span><span class="se">\&#34;</span><span class="s1">من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم</span><span class="se">\&#34;</span><span class="s1">,
+</span><span class="s1">    </span><span class="se">\&#34;</span><span class="s1">checkSlang</span><span class="se">\&#34;</span><span class="s1">: true,
+</span><span class="s1">    </span><span class="se">\&#34;</span><span class="s1">normalize</span><span class="se">\&#34;</span><span class="s1">: true,
+</span><span class="s1">    </span><span class="se">\&#34;</span><span class="s1">normalizerParams</span><span class="se">\&#34;</span><span class="s1">: {
+</span><span class="s1">        </span><span class="se">\&#34;</span><span class="s1">text</span><span class="se">\&#34;</span><span class="s1">: </span><span class="se">\&#34;</span><span class="s1">don&#39;t care</span><span class="se">\&#34;</span><span class="s1">,
+</span><span class="s1">        </span><span class="se">\&#34;</span><span class="s1">replaceWildChar</span><span class="se">\&#34;</span><span class="s1">: true,
+</span><span class="s1">        </span><span class="se">\&#34;</span><span class="s1">replaceDigit</span><span class="se">\&#34;</span><span class="s1">: true,
+</span><span class="s1">        </span><span class="se">\&#34;</span><span class="s1">refineSeparatedAffix</span><span class="se">\&#34;</span><span class="s1">: true,
+</span><span class="s1">        </span><span class="se">\&#34;</span><span class="s1">refineQuotationPunc</span><span class="se">\&#34;</span><span class="s1">: false
+</span><span class="s1">    },
+</span><span class="s1">    </span><span class="se">\&#34;</span><span class="s1">complexSentence</span><span class="se">\&#34;</span><span class="s1">: true
+</span><span class="s1">}&#39;&#39;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: [[&ldquo;من&rdquo;,&ldquo;با&rdquo;,&ldquo;دوستم&rdquo;,&ldquo;به&rdquo;,&ldquo;مدرسه&rdquo;,&ldquo;می‌رفتیم&rdquo;],[&ldquo;و&rdquo;,&ldquo;در&rdquo;,&ldquo;آنجا&rdquo;,&ldquo;مشغول&rdquo;,&ldquo;به&rdquo;,&ldquo;تحصیل&rdquo;,&ldquo;بودیم&rdquo;,&ldquo;.&rdquo;],[&ldquo;سپس&rdquo;,&ldquo;به&rdquo;,&ldquo;دانشگاه&rdquo;,&ldquo;راه&rdquo;,&ldquo;یافتیم&rdquo;]]</p>
 </blockquote>
@@ -345,7 +386,11 @@
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;PreProcessing/Tokenize&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;(</span><span class="n">resp</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">######################## Call Tokenizer ############################</span>
+
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;PreProcessing/Tokenize&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&#34;</span><span class="se">\&#34;</span><span class="s2">من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: [&ldquo;من&rdquo;,&ldquo;با&rdquo;,&ldquo;دوستم&rdquo;,&ldquo;به&rdquo;,&ldquo;مدرسه&rdquo;,&ldquo;می&rdquo;,&ldquo;رفتیم&rdquo;,&ldquo;و&rdquo;,&ldquo;در&rdquo;,&ldquo;آنجا&rdquo;,&ldquo;مشغول&rdquo;,&ldquo;به&rdquo;,&ldquo;تحصیل&rdquo;,&ldquo;بودیم&rdquo;,&ldquo;&hellip;&rdquo;,&ldquo;سپس&rdquo;,&ldquo;به&rdquo;,&ldquo;دانشگاه&rdquo;,&ldquo;راه&rdquo;,&ldquo;یافتیم&rdquo;]</p>
 </blockquote>
@@ -445,7 +490,13 @@
 <span class="p">});</span>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextRefinement/SpellCorrector&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">########################## Call Stemmer ##########################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;TextRefinement/SpellCorrector&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;{</span><span class="se">\&#34;</span><span class="s1">text</span><span class="se">\&#34;</span><span class="s1">: </span><span class="se">\&#34;</span><span class="s1">فهوه با مبات میجسبد</span><span class="se">\&#34;</span><span class="s1">,
+</span><span class="s1">            </span><span class="se">\&#34;</span><span class="s1">checkSlang</span><span class="se">\&#34;</span><span class="s1">: true,
+</span><span class="s1">            </span><span class="se">\&#34;</span><span class="s1">normalize</span><span class="se">\&#34;</span><span class="s1">: true,
+</span><span class="s1">            </span><span class="se">\&#34;</span><span class="s1">candidateCount</span><span class="se">\&#34;</span><span class="s1">: 2}&#39;&#39;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: قهوه با {نبات,ملات,مباد} {می‌چسبد,می‌جنبد}</p>
 </blockquote>
@@ -487,7 +538,14 @@
 <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="n">inputText</span><span class="p">);</span>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextRefinement/FormalConverter&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">################ Call Slang to Formal Converter ##################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;TextRefinement/FormalConverter&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;&#34;اگه اون گزینه رو کلیک کنین، یه پنجره باز میشه که میتونین رمز عبورتون رو اونجا تغییر بدین
+</span><span class="s1">    داشتم مي رفتم برم، ديدم گرفت نشست، گفتم بذار بپرسم ببينم مياد نمياد ديدم ميگه نميخوام بيام بذار برم بگيرم بخوابم نمیتونم بشینم.
+</span><span class="s1">    کتابای خودتونه
+</span><span class="s1">    نمیدونم چی بگم که دیگه اونجا نره
+</span><span class="s1">    ساعت چن میتونین بیایین؟&#34;&#39;&#39;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: اگر آن گزینه را کلیک کنید، یک پنجره باز می‌شود که می‌توانید رمز عبورتان را آنجا تغییر بدهید
 داشتم می‌رفتم بروم، دیدم گرفت نشست، گفتم بگذار بپرسم ببینم می‌آید نمی‌آید دیدم می‌گوید نمی‌خواهم بیایم بگذار بروم بگیرم بخوابم نمی‌توانم بنشینم.
@@ -532,7 +590,12 @@
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextRefinement/SwearWordTagger&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;&gt;(</span><span class="n">resp</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">################## Call Swear Word Detector ######################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;TextRefinement/SwearWordTagger&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#34;خـــــــرررررهای دیووووونههه  -   صکس  س.ک.س ی  </span><span class="se">\r\n</span><span class="s1"> بیپدرومادر&#34;&#39;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span>
+<span class="c1">## for item in result: ...</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: {&ldquo;خرررررهای&rdquo;:&ldquo;MildSwearWord&rdquo;,&ldquo;دیووووونههه&rdquo;:&ldquo;MildSwearWord&rdquo;,&ldquo;صکس&rdquo;:&ldquo;StrongSwearWord&rdquo;,&ldquo;س.ک.س&rdquo;:&ldquo;StrongSwearWord&rdquo;,&ldquo;بیپدرومادر&rdquo;:&ldquo;StrongSwearWord&rdquo;}</p>
 </blockquote>
@@ -574,7 +637,10 @@
 <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="s">&#34;شام ییبسن یا یوخ. سن سیز بوغازیمنان گتمیر شام. به به نه قشه یردی. ساغ اول سیز نئجه سیز. نئجه سن؟ اوشاقلار نئجه دیر؟ سلام لاری وار سیزین کی لر نئجه دیر. یاخچی&#34;</span><span class="p">);</span>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;LanguageDetection/Predict&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">##################### Call Language Detection #######################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;LanguageDetection/Predict&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#34;شام ییبسن یا یوخ. سن سیز بوغازیمنان گتمیر شام. به به نه قشه یردی. ساغ اول سیز نئجه سیز. نئجه سن؟ اوشاقلار نئجه دیر؟ سلام لاری وار سیزین کی لر نئجه دیر. یاخچی&#34;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: azb</p>
 </blockquote>
@@ -636,7 +702,12 @@
 <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="n">JObject</span> <span class="n">token</span> <span class="k">in</span> <span class="n">tokens</span><span class="p">.</span><span class="n">Children</span><span class="p">&lt;</span><span class="n">JObject</span><span class="p">&gt;())</span>
     <span class="n">result</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">$&#34;{{{token[&#34;</span><span class="n">word</span><span class="s">&#34;]},{token[&#34;</span><span class="n">tags</span><span class="s">&#34;][&#34;</span><span class="n">NER</span><span class="s">&#34;][&#34;</span><span class="n">item1</span><span class="s">&#34;]}}}&#34;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">############################ Call NER ###############################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;NamedEntityRecognition/Detect&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#34;احمد عباسی به تحصیلات خود در دانشگاه آزاد اسلامی در مشهد ادامه داد&#34;&#39;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">phrase</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;(&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;,&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">][</span><span class="s1">&#39;NER&#39;</span><span class="p">][</span><span class="s1">&#39;item1&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;) &#34;</span><span class="p">)</span></code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: {احمد,B-PER} {عباسی,I-PER} {به,O} {تحصیلات,O} {خود,O} {در,O} {دانشگاه,B-ORG} {آزاد,I-ORG} {اسلامی,I-ORG} {در,O} {مشهد,I-LOC} {ادامه,O} {داد,O}</p>
 </blockquote>
@@ -684,7 +755,12 @@
 <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="n">JObject</span> <span class="n">token</span> <span class="k">in</span> <span class="n">tokens</span><span class="p">.</span><span class="n">Children</span><span class="p">&lt;</span><span class="n">JObject</span><span class="p">&gt;())</span>
     <span class="n">result</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">$&#34;{{{token[&#34;</span><span class="n">word</span><span class="s">&#34;]},{token[&#34;</span><span class="n">tags</span><span class="s">&#34;][&#34;</span><span class="n">POS</span><span class="s">&#34;][&#34;</span><span class="n">item1</span><span class="s">&#34;]}}}&#34;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">######################## Call POS-Tagger ############################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;PosTagger/GetPos&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#34;احمد و علی به مدرسه پایین خیابان می رفتند&#34;&#39;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">phrase</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;(&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;,&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">][</span><span class="s1">&#39;POS&#39;</span><span class="p">][</span><span class="s1">&#39;item1&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;) &#34;</span><span class="p">)</span></code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: {احمد,N} {و,CON} {علی,N} {به,P} {مدرسه,N} {پایین,ADJ} {خیابان,N} {می‌رفتند,V} {.,DELM}</p>
 </blockquote>
@@ -858,7 +934,10 @@ verbInformation</p>
 <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="s">&#34;دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.&#34;</span><span class="p">);</span>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;Stemmer/LemmatizeText2Text&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">########################## Call Stemmer ##########################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;Stemmer/LemmatizeText2Text&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#34;دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.&#34;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: دانشجو زیاد به مدرسه استعداد درخشان راه پیدا نکرد که با مشکل بعد مواجه شد.</p>
 </blockquote>
@@ -1397,6 +1476,8 @@ verbInformation</p>
             <div class="lang-selector">
                 
                 <a href="#" data-language-name="csharp">C#</a>
+                
+                <a href="#" data-language-name="python">Python</a>
                 
             </div>
             
