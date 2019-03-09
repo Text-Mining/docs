@@ -21,6 +21,10 @@ search = true
 key = "csharp"
 name = "C#" 
 
+[[params.language_tabs]]
+key = "python"
+name = "Python" 
+
 
 
 #Languages 

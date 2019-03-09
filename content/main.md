@@ -12,6 +12,7 @@ title: API Reference
 متن‌کاوی، مجموعه‌ای از خدمات ‌آنلاین مربوط به پردازش متون فارسی را در قالب Rest API در اختیار برنامه‌نویسان قرار می‌دهد.
 
 **توجه: برای استفاده از هر یک از امکانات وب سرویس متن‌کاوی باید کلید API داشته باشید**
+همچنین برای جلوگیری از تکرار در نمونه کد بعضی از زبان‌ها مانند پایتون، بعضی از توابع پایه‌ای مثل تابع فراخوانی Rest API یا دریافت توکن تنها یک بار اضافه شده‌اند
 
 <aside class="success">
 لیست کامل توابع API در قالب <code>swagger</code> در <a href="https://api.text-mining.ir">https://api.text-mining.ir</a> در دسترس است
@@ -34,6 +35,30 @@ private string GetJWTToken()
     }
     return jwtToken;
 }
+```
+
+```python
+import requests
+import json
+
+def callApi(url, data, tokenKey):
+    headers = {
+        'Content-Type': "application/json",
+        'Authorization': "Bearer " + tokenKey,
+        'Cache-Control': "no-cache"
+    }
+    response = requests.request("POST", url, data=data.encode("utf-8"), headers=headers)
+    return response.text
+
+##################### Get Token by Api Key ##########################
+
+baseUrl = "http://api.text-mining.ir/api/"
+url = baseUrl + "Token/GetToken"
+querystring = {"apikey":"YOUR_API_KEY"}
+response = requests.request("GET", url, params=querystring)
+data = json.loads(response.text)
+tokenKey = data['token']
+
 ```
 
 > در صورت موفق بودن درخواست، خروجی شبیه زیر برگردانده می‌شود که `TOKEN_VALUE` همان توکن احراز هویت شماست.
@@ -77,6 +102,17 @@ string json = JsonConvert.SerializeObject(new
 var response = client.PostAsync(_baseAddress + "PreProcessing/NormalizePersianWord", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
+```
+
+```python
+
+######################## Call Normalizer ############################
+
+baseUrl = "http://api.text-mining.ir/api/"
+url =  baseUrl + "PreProcessing/NormalizePersianWord"
+payload = u"{\"text\":\"ولــے اگــر دڪــمــه مــڪــث رو لــمــس ڪــنــیــم ڪــلــا مــتــن چــنــدیــن صــفــحــه جــابــه جــا مــیــشــه و دیــگــه نــمــیــشــه فــهمــیــد ڪــدوم آیــه تــلــاوت مــی شود بــایــد چــے ڪــنــیــم؟.\", \"refineSeparatedAffix\":true}"
+print(callApi(url, payload, tokenKey))
+
 ```
 
 > خروجی مثال کد بالا: ولی اگر دکمه مکث رو لمس کنیم کلا متن چندین صفحه جابه جا میشه و دیگه نمیشه فهمید کدوم آیه تلاوت می‌شود باید چی کنیم؟.
@@ -170,6 +206,26 @@ Console.WriteLine(resp);
 
 ```
 
+```python
+
+############# Call Sentence Splitter and Tokenizer #################
+url =  baseUrl + "PreProcessing/SentenceSplitterAndTokenize"
+payload = u'''{\"text\": \"من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم\",
+    \"checkSlang\": true,
+    \"normalize\": true,
+    \"normalizerParams\": {
+        \"text\": \"don't care\",
+        \"replaceWildChar\": true,
+        \"replaceDigit\": true,
+        \"refineSeparatedAffix\": true,
+        \"refineQuotationPunc\": false
+    },
+    \"complexSentence\": true
+}'''
+print(callApi(url, payload, tokenKey))
+
+```
+
 > خروجی مثال کد بالا: [["من","با","دوستم","به","مدرسه","می‌رفتیم"],["و","در","آنجا","مشغول","به","تحصیل","بودیم","."],["سپس","به","دانشگاه","راه","یافتیم"]]
 
 ### آدرس و نوع تابع وب‌سرویس
@@ -202,6 +258,16 @@ var response = client.PostAsync(baseAddress + "PreProcessing/Tokenize", new Stri
 string resp = response.Content.ReadAsStringAsync().Result;
 var result = JsonConvert.DeserializeObject<List<string>>(resp);
 Console.WriteLine(resp);
+
+```
+
+```python
+
+######################## Call Tokenizer ############################
+
+url =  baseUrl + "PreProcessing/Tokenize"
+payload = u"\"من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم\""
+print(callApi(url, payload, tokenKey))
 
 ```
 
@@ -275,6 +341,18 @@ string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
 ```
 
+```python
+
+########################## Call Stemmer ##########################
+url =  baseUrl + "TextRefinement/SpellCorrector"
+payload = u'''{\"text\": \"فهوه با مبات میجسبد\",
+            \"checkSlang\": true,
+            \"normalize\": true,
+            \"candidateCount\": 2}'''
+print(callApi(url, payload, tokenKey))
+
+```
+
 > خروجی مثال کد بالا: قهوه با {نبات,ملات,مباد} {می‌چسبد,می‌جنبد}
 
 ### آدرس و نوع تابع وب‌سرویس
@@ -306,6 +384,19 @@ string json = JsonConvert.SerializeObject(inputText);
 var response = client.PostAsync(baseAddress + "TextRefinement/FormalConverter", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
+```
+
+```python
+
+################ Call Slang to Formal Converter ##################
+url =  baseUrl + "TextRefinement/FormalConverter"
+payload = u'''"اگه اون گزینه رو کلیک کنین، یه پنجره باز میشه که میتونین رمز عبورتون رو اونجا تغییر بدین
+    داشتم مي رفتم برم، ديدم گرفت نشست، گفتم بذار بپرسم ببينم مياد نمياد ديدم ميگه نميخوام بيام بذار برم بگيرم بخوابم نمیتونم بشینم.
+    کتابای خودتونه
+    نمیدونم چی بگم که دیگه اونجا نره
+    ساعت چن میتونین بیایین؟"'''
+print(callApi(url, payload, tokenKey))
+
 ```
 
 > خروجی مثال کد بالا: اگر آن گزینه را کلیک کنید، یک پنجره باز می‌شود که می‌توانید رمز عبورتان را آنجا تغییر بدهید
@@ -342,6 +433,17 @@ var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(resp);
 Console.WriteLine(resp);
 ```
 
+```python
+
+################## Call Swear Word Detector ######################
+url =  baseUrl + "TextRefinement/SwearWordTagger"
+payload = u'"خـــــــرررررهای دیووووونههه  -   صکس  س.ک.س ی  \r\n بیپدرومادر"'
+result = json.loads(callApi(url, payload, tokenKey))
+## for item in result: ...
+print(result)
+
+```
+
 > خروجی مثال کد بالا: {"خرررررهای":"MildSwearWord","دیووووونههه":"MildSwearWord","صکس":"StrongSwearWord","س.ک.س":"StrongSwearWord","بیپدرومادر":"StrongSwearWord"}
 
 ### آدرس و نوع تابع وب‌سرویس
@@ -372,6 +474,14 @@ var response = client.PostAsync(baseAddress + "LanguageDetection/Predict", new S
 string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
 
+```
+
+```python
+
+##################### Call Language Detection #######################
+url =  baseUrl + "LanguageDetection/Predict"
+payload = u'"شام ییبسن یا یوخ. سن سیز بوغازیمنان گتمیر شام. به به نه قشه یردی. ساغ اول سیز نئجه سیز. نئجه سن؟ اوشاقلار نئجه دیر؟ سلام لاری وار سیزین کی لر نئجه دیر. یاخچی"'
+print(callApi(url, payload, tokenKey))
 ```
 
 > خروجی مثال کد بالا: azb
@@ -423,6 +533,18 @@ foreach (JObject token in tokens.Children<JObject>())
 Console.WriteLine(result.ToString());
 ```
 
+```python
+
+############################ Call NER ###############################
+url =  baseUrl + "NamedEntityRecognition/Detect"
+payload = u'"احمد عباسی به تحصیلات خود در دانشگاه آزاد اسلامی در مشهد ادامه داد"'
+result = json.loads(callApi(url, payload, tokenKey))
+for phrase in result:
+    print("("+phrase['word']+","+phrase['tags']['NER']['item1']+") ")
+
+
+```
+
 > خروجی مثال کد بالا: {احمد,B-PER} {عباسی,I-PER} {به,O} {تحصیلات,O} {خود,O} {در,O} {دانشگاه,B-ORG} {آزاد,I-ORG} {اسلامی,I-ORG} {در,O} {مشهد,I-LOC} {ادامه,O} {داد,O}
 
 ### آدرس و نوع تابع وب‌سرویس
@@ -458,6 +580,18 @@ var result = new StringBuilder();
 foreach (JObject token in tokens.Children<JObject>())
     result.AppendLine($"{{{token["word"]},{token["tags"]["POS"]["item1"]}}}");
 Console.WriteLine(result.ToString());
+```
+
+```python
+
+######################## Call POS-Tagger ############################
+url =  baseUrl + "PosTagger/GetPos"
+payload = u'"احمد و علی به مدرسه پایین خیابان می رفتند"'
+result = json.loads(callApi(url, payload, tokenKey))
+for phrase in result:
+    print("("+phrase['word']+","+phrase['tags']['POS']['item1']+") ")
+
+
 ```
 
 > خروجی مثال کد بالا: {احمد,N} {و,CON} {علی,N} {به,P} {مدرسه,N} {پایین,ADJ} {خیابان,N} {می‌رفتند,V} {.,DELM}
@@ -575,6 +709,16 @@ string json = JsonConvert.SerializeObject("دانشجویان زیادی به م
 var response = client.PostAsync(baseAddress + "Stemmer/LemmatizeText2Text", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
+
+```
+
+```python
+
+########################## Call Stemmer ##########################
+url =  baseUrl + "Stemmer/LemmatizeText2Text"
+payload = u'"دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند."'
+print(callApi(url, payload, tokenKey))
+
 
 ```
 
