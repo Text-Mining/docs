@@ -17,7 +17,7 @@
 
     
 </head>
-<body class="index" data-languages="[ &#34;csharp&#34; ,  &#34;python&#34; ]">
+<body class="index" data-languages="[ &#34;csharp&#34; ,  &#34;python&#34; ,  &#34;java&#34; ,  &#34;php&#34; ]">
     <a href="#" id="nav-button">
         <span>
         NAV
@@ -33,6 +33,10 @@
             <a href="#" data-language-name="csharp">C#</a>
             
             <a href="#" data-language-name="python">Python</a>
+            
+            <a href="#" data-language-name="java">Java</a>
+            
+            <a href="#" data-language-name="php">PHP</a>
             
         </div>
          
@@ -114,7 +118,38 @@
 <span class="n">querystring</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;apikey&#34;</span><span class="p">:</span><span class="s2">&#34;YOUR_API_KEY&#34;</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">querystring</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-<span class="n">tokenKey</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span></code></pre></div>
+<span class="n">tokenKey</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/Token/GetToken?apikey=YOUR_API_KEY&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/Token/GetToken&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_GET</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;apikey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;YOUR_API_KEY&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>در صورت موفق بودن درخواست، خروجی شبیه زیر برگردانده می‌شود که <code>TOKEN_VALUE</code> همان توکن احراز هویت شماست.</p>
 </blockquote>
@@ -155,7 +190,42 @@
 <span class="n">baseUrl</span> <span class="o">=</span> <span class="s2">&#34;http://api.text-mining.ir/api/&#34;</span>
 <span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;PreProcessing/NormalizePersianWord&#34;</span>
 <span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&#34;{</span><span class="se">\&#34;</span><span class="s2">text</span><span class="se">\&#34;</span><span class="s2">:</span><span class="se">\&#34;</span><span class="s2">ولــے اگــر دڪــمــه مــڪــث رو لــمــس ڪــنــیــم ڪــلــا مــتــن چــنــدیــن صــفــحــه جــابــه جــا مــیــشــه و دیــگــه نــمــیــشــه فــهمــیــد ڪــدوم آیــه تــلــاوت مــی شود بــایــد چــے ڪــنــیــم؟.</span><span class="se">\&#34;</span><span class="s2">, </span><span class="se">\&#34;</span><span class="s2">refineSeparatedAffix</span><span class="se">\&#34;</span><span class="s2">:true}&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;ولــے اگــر دڪــمــه مــڪــث رو لــمــس ڪــنــیــم ڪــلــا مــتــن چــنــدیــن صــفــحــه جــابــه جــا مــیــشــه و دیــگــه نــمــیــشــه فــهمــیــد ڪــدوم آیــه تــلــاوت مــی شود بــایــد چــے ڪــنــیــم؟.\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/PreProcessing/NormalizePersianWord&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/PreProcessing/NormalizePersianWord&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;ولــے اگــر دڪــمــه مــڪــث رو لــمــس ڪــنــیــم ڪــلــا مــتــن چــنــدیــن صــفــحــه جــابــه جــا مــیــشــه و دیــگــه نــمــیــشــه فــهمــیــد ڪــدوم آیــه تــلــاوت مــی شود بــایــد چــے ڪــنــیــم؟.&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: ولی اگر دکمه مکث رو لمس کنیم کلا متن چندین صفحه جابه جا میشه و دیگه نمیشه فهمید کدوم آیه تلاوت می‌شود باید چی کنیم؟.</p>
 </blockquote>
@@ -231,7 +301,53 @@
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;PreProcessing/SentenceSplitter&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;(</span><span class="n">resp</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">##################### Call Sentence Splitter ########################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;PreProcessing/SentenceSplitter&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;{</span><span class="se">\&#34;</span><span class="s1">text</span><span class="se">\&#34;</span><span class="s1">: </span><span class="se">\&#34;</span><span class="s1">من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم</span><span class="se">\&#34;</span><span class="s1">,
+</span><span class="s1">    </span><span class="se">\&#34;</span><span class="s1">checkSlang</span><span class="se">\&#34;</span><span class="s1">: true,
+</span><span class="s1">    </span><span class="se">\&#34;</span><span class="s1">normalize</span><span class="se">\&#34;</span><span class="s1">: true,
+</span><span class="s1">    </span><span class="se">\&#34;</span><span class="s1">normalizerParams</span><span class="se">\&#34;</span><span class="s1">: {
+</span><span class="s1">        </span><span class="se">\&#34;</span><span class="s1">text</span><span class="se">\&#34;</span><span class="s1">: </span><span class="se">\&#34;</span><span class="s1">don&#39;t care</span><span class="se">\&#34;</span><span class="s1">,
+</span><span class="s1">        </span><span class="se">\&#34;</span><span class="s1">RefineQuotationPunc </span><span class="se">\&#34;</span><span class="s1">: false
+</span><span class="s1">    },
+</span><span class="s1">    </span><span class="se">\&#34;</span><span class="s1">complexSentence</span><span class="se">\&#34;</span><span class="s1">: true
+</span><span class="s1">}&#39;&#39;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/PreProcessing/SentenceSplitter&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/PreProcessing/SentenceSplitter&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: [&ldquo;من با دوستم به مدرسه می‌رفتیم&rdquo;,&ldquo;و در آنجا مشغول به تحصیل بودیم .&rdquo;,&ldquo;سپس به دانشگاه راه یافتیم&rdquo;]</p>
 </blockquote>
@@ -321,7 +437,42 @@
 </span><span class="s1">    },
 </span><span class="s1">    </span><span class="se">\&#34;</span><span class="s1">complexSentence</span><span class="se">\&#34;</span><span class="s1">: true
 </span><span class="s1">}&#39;&#39;&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/PreProcessing/SentenceSplitterAndTokenize&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/PreProcessing/SentenceSplitterAndTokenize&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: [[&ldquo;من&rdquo;,&ldquo;با&rdquo;,&ldquo;دوستم&rdquo;,&ldquo;به&rdquo;,&ldquo;مدرسه&rdquo;,&ldquo;می‌رفتیم&rdquo;],[&ldquo;و&rdquo;,&ldquo;در&rdquo;,&ldquo;آنجا&rdquo;,&ldquo;مشغول&rdquo;,&ldquo;به&rdquo;,&ldquo;تحصیل&rdquo;,&ldquo;بودیم&rdquo;,&ldquo;.&rdquo;],[&ldquo;سپس&rdquo;,&ldquo;به&rdquo;,&ldquo;دانشگاه&rdquo;,&ldquo;راه&rdquo;,&ldquo;یافتیم&rdquo;]]</p>
 </blockquote>
@@ -390,7 +541,42 @@
 
 <span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;PreProcessing/Tokenize&#34;</span>
 <span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&#34;</span><span class="se">\&#34;</span><span class="s2">من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\tinputText:\&#34;من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/PreProcessing/Tokenize&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/PreProcessing/Tokenize&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	inputText:&#34;من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: [&ldquo;من&rdquo;,&ldquo;با&rdquo;,&ldquo;دوستم&rdquo;,&ldquo;به&rdquo;,&ldquo;مدرسه&rdquo;,&ldquo;می&rdquo;,&ldquo;رفتیم&rdquo;,&ldquo;و&rdquo;,&ldquo;در&rdquo;,&ldquo;آنجا&rdquo;,&ldquo;مشغول&rdquo;,&ldquo;به&rdquo;,&ldquo;تحصیل&rdquo;,&ldquo;بودیم&rdquo;,&ldquo;&hellip;&rdquo;,&ldquo;سپس&rdquo;,&ldquo;به&rdquo;,&ldquo;دانشگاه&rdquo;,&ldquo;راه&rdquo;,&ldquo;یافتیم&rdquo;]</p>
 </blockquote>
@@ -437,7 +623,46 @@
 <span class="p">});</span>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextRefinement/SpellCorrectorInContext&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">rl</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;TextRefinement/SpellCorrectorInContext&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;{</span><span class="se">\&#34;</span><span class="s1">text</span><span class="se">\&#34;</span><span class="s1">: </span><span class="se">\&#34;</span><span class="s1">ستر حیوانی است که در صحرا با مقدار کم آب زندگی میکند</span><span class="se">\&#34;</span><span class="s1">,
+</span><span class="s1">            </span><span class="se">\&#34;</span><span class="s1">normalize</span><span class="se">\&#34;</span><span class="s1">: true,
+</span><span class="s1">            </span><span class="se">\&#34;</span><span class="s1">candidateCount</span><span class="se">\&#34;</span><span class="s1">: 3}&#39;&#39;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;ستر حیوانی است که در صحرا با مقدار کم آب زندگی میکند\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/TextRefinement/SpellCorrectorInContext&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/TextRefinement/SpellCorrectorInContext&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;ستر حیوانی است که در صحرا با مقدار کم آب زندگی میکند&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: {شتر,سطر,سفر} {حیوانی,حیوان,یونانی} {است,دست,هست} که در {صحرا,صفرا,صدرا} با {مقدار,مدار,مقدر} کم آب {زندگی,بندگی,زدگی} {می‌کند,می‌کند,مکند}</p>
 </blockquote>
@@ -496,7 +721,42 @@
 </span><span class="s1">            </span><span class="se">\&#34;</span><span class="s1">checkSlang</span><span class="se">\&#34;</span><span class="s1">: true,
 </span><span class="s1">            </span><span class="se">\&#34;</span><span class="s1">normalize</span><span class="se">\&#34;</span><span class="s1">: true,
 </span><span class="s1">            </span><span class="se">\&#34;</span><span class="s1">candidateCount</span><span class="se">\&#34;</span><span class="s1">: 2}&#39;&#39;&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;فهوه با مبات میجسبد\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/TextRefinement/SpellCorrector&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/TextRefinement/SpellCorrector&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;فهوه با مبات میجسبد&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: قهوه با {نبات,ملات,مباد} {می‌چسبد,می‌جنبد}</p>
 </blockquote>
@@ -545,7 +805,43 @@
 </span><span class="s1">    کتابای خودتونه
 </span><span class="s1">    نمیدونم چی بگم که دیگه اونجا نره
 </span><span class="s1">    ساعت چن میتونین بیایین؟&#34;&#39;&#39;&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\n\t\&#34;اگه اون گزینه رو کلیک کنین، یه پنجره باز میشه که میتونین رمز عبورتون رو اونجا تغییر بدین داشتم مي رفتم برم، ديدم گرفت نشست، گفتم بذار بپرسم ببينم مياد نمياد ديدم ميگه نميخوام بيام بذار برم بگيرم بخوابم نمیتونم بشینم.  کتابای خودتونه  نمیدونم چی بگم که دیگه اونجا نره ساعت چن میتونین بیایین؟\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/TextRefinement/FormalConverter&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/TextRefinement/FormalConverter&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:
+</span><span class="s1">	&#34;اگه اون گزینه رو کلیک کنین، یه پنجره باز میشه که میتونین رمز عبورتون رو اونجا تغییر بدین داشتم مي رفتم برم، ديدم گرفت نشست، گفتم بذار بپرسم ببينم مياد نمياد ديدم ميگه نميخوام بيام بذار برم بگيرم بخوابم نمیتونم بشینم.  کتابای خودتونه  نمیدونم چی بگم که دیگه اونجا نره ساعت چن میتونین بیایین؟&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: اگر آن گزینه را کلیک کنید، یک پنجره باز می‌شود که می‌توانید رمز عبورتان را آنجا تغییر بدهید
 داشتم می‌رفتم بروم، دیدم گرفت نشست، گفتم بگذار بپرسم ببینم می‌آید نمی‌آید دیدم می‌گوید نمی‌خواهم بیایم بگذار بروم بگیرم بخوابم نمی‌توانم بنشینم.
@@ -595,7 +891,42 @@
 <span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#34;خـــــــرررررهای دیووووونههه  -   صکس  س.ک.س ی  </span><span class="se">\r\n</span><span class="s1"> بیپدرومادر&#34;&#39;</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span>
 <span class="c1">## for item in result: ...</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></code></pre></div>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;خـــــــرررررهای دیووووونههه  -   صکس  س.ک.س ی  \\r\\n بیپدرومادر\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/TextRefinement/SwearWordTagger&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/TextRefinement/SwearWordTagger&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;خـــــــرررررهای دیووووونههه  -   صکس  س.ک.س ی  \\r\\n بیپدرومادر&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: {&ldquo;خرررررهای&rdquo;:&ldquo;MildSwearWord&rdquo;,&ldquo;دیووووونههه&rdquo;:&ldquo;MildSwearWord&rdquo;,&ldquo;صکس&rdquo;:&ldquo;StrongSwearWord&rdquo;,&ldquo;س.ک.س&rdquo;:&ldquo;StrongSwearWord&rdquo;,&ldquo;بیپدرومادر&rdquo;:&ldquo;StrongSwearWord&rdquo;}</p>
 </blockquote>
@@ -640,7 +971,42 @@
 <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">##################### Call Language Detection #######################</span>
 <span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;LanguageDetection/Predict&#34;</span>
 <span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#34;شام ییبسن یا یوخ. سن سیز بوغازیمنان گتمیر شام. به به نه قشه یردی. ساغ اول سیز نئجه سیز. نئجه سن؟ اوشاقلار نئجه دیر؟ سلام لاری وار سیزین کی لر نئجه دیر. یاخچی&#34;&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;شام ییبسن یا یوخ. سن سیز بوغازیمنان گتمیر شام. به به نه قشه یردی. ساغ اول سیز نئجه سیز. نئجه سن؟ اوشاقلار نئجه دیر؟ سلام لاری وار سیزین کی لر نئجه دیر. یاخچی\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/LanguageDetection/Predict&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/LanguageDetection/Predict&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;شام ییبسن یا یوخ. سن سیز بوغازیمنان گتمیر شام. به به نه قشه یردی. ساغ اول سیز نئجه سیز. نئجه سن؟ اوشاقلار نئجه دیر؟ سلام لاری وار سیزین کی لر نئجه دیر. یاخچی&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: azb</p>
 </blockquote>
@@ -707,7 +1073,42 @@
 <span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#34;احمد عباسی به تحصیلات خود در دانشگاه آزاد اسلامی در مشهد ادامه داد&#34;&#39;</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">phrase</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;(&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;,&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">][</span><span class="s1">&#39;NER&#39;</span><span class="p">][</span><span class="s1">&#39;item1&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;) &#34;</span><span class="p">)</span></code></pre></div>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;(&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;,&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">][</span><span class="s1">&#39;NER&#39;</span><span class="p">][</span><span class="s1">&#39;item1&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;) &#34;</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\tinputText:\&#34;احمد عباسی به تحصیلات خود در دانشگاه آزاد اسلامی در مشهد ادامه داد\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/NamedEntityRecognition/Detect&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/NamedEntityRecognition/Detect&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	inputText:&#34;احمد عباسی به تحصیلات خود در دانشگاه آزاد اسلامی در مشهد ادامه داد&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: {احمد,B-PER} {عباسی,I-PER} {به,O} {تحصیلات,O} {خود,O} {در,O} {دانشگاه,B-ORG} {آزاد,I-ORG} {اسلامی,I-ORG} {در,O} {مشهد,I-LOC} {ادامه,O} {داد,O}</p>
 </blockquote>
@@ -760,7 +1161,42 @@
 <span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#34;احمد و علی به مدرسه پایین خیابان می رفتند&#34;&#39;</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">phrase</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;(&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;,&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">][</span><span class="s1">&#39;POS&#39;</span><span class="p">][</span><span class="s1">&#39;item1&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;) &#34;</span><span class="p">)</span></code></pre></div>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;(&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;,&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">][</span><span class="s1">&#39;POS&#39;</span><span class="p">][</span><span class="s1">&#39;item1&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;) &#34;</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;احمد و علی به مدرسه پایین خیابان می رفتند\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/NamedEntityRecognition/Detect&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/NamedEntityRecognition/Detect&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;احمد و علی به مدرسه پایین خیابان می رفتند&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: {احمد,N} {و,CON} {علی,N} {به,P} {مدرسه,N} {پایین,ADJ} {خیابان,N} {می‌رفتند,V} {.,DELM}</p>
 </blockquote>
@@ -811,7 +1247,42 @@
 
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;Stemmer/LemmatizePhrase2Phrase&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;Stemmer/LemmatizePhrase2Phrase&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;{&#34;phrases&#34;: [{ &#34;word&#34;: &#34;دریانوردانی&#34; }, { &#34;word&#34;: &#34;فرشتگان&#34; }], &#34;checkSlang&#34;: false}&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;application/json&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\&#34;phrases\&#34;: [{ \&#34;word\&#34;: \&#34;دریانوردانی\&#34; }, { \&#34;word\&#34;: \&#34;فرشتگان\&#34; }], \&#34;checkSlang\&#34;: false}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/Stemmer/LemmatizePhrase2Phrase&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/Stemmer/LemmatizePhrase2Phrase&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{&#34;phrases&#34;: [{ &#34;word&#34;: &#34;دریانوردانی&#34; }, { &#34;word&#34;: &#34;فرشتگان&#34; }], &#34;checkSlang&#34;: false}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-11">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/Stemmer/LemmatizePhrase2Phrase</code></p>
@@ -881,7 +1352,44 @@ verbInformation</p>
 <span class="n">result</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">Length</span> <span class="p">-</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
 <span class="n">result</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">&#34;]}&#34;</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;Stemmer/LemmatizeText2Phrase&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;{&#34;text&#34;: &#34;دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.&#34;, &#34;checkSlang&#34;: false}&#39;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">phrase</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;(&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;:&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;firstRoot&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;) &#34;</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;application/json&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\&#34;text\&#34;: \&#34;دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.\&#34;, \&#34;checkSlang\&#34;: false}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/Stemmer/LemmatizeText2Phrase&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/Stemmer/LemmatizeText2Phrase&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{&#34;text&#34;: &#34;دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.&#34;, &#34;checkSlang&#34;: false}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-12">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/Stemmer/LemmatizeText2Phrase</code></p>
@@ -937,7 +1445,42 @@ verbInformation</p>
 <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">########################## Call Stemmer ##########################</span>
 <span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;Stemmer/LemmatizeText2Text&#34;</span>
 <span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#34;دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.&#34;&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/Stemmer/LemmatizeText2Text&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/Stemmer/LemmatizeText2Text&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: دانشجو زیاد به مدرسه استعداد درخشان راه پیدا نکرد که با مشکل بعد مواجه شد.</p>
 </blockquote>
@@ -976,7 +1519,44 @@ verbInformation</p>
 <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="k">new</span><span class="na">[]</span> <span class="p">{</span> <span class="s">&#34;مشاجرات&#34;</span><span class="p">,</span> <span class="s">&#34;دریانوردانی&#34;</span><span class="p">,</span> <span class="s">&#34;جزایر&#34;</span><span class="p">,</span> <span class="s">&#34;فرشتگان&#34;</span><span class="p">,</span> <span class="s">&#34;تنها&#34;</span> <span class="p">});</span>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;Stemmer/LemmatizeWords2Phrase&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;Stemmer/LemmatizeWords2Phrase&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;[&#34;دریانوردانی&#34;, &#34;جزایر&#34;, &#34;فرشتگان&#34;, &#34;تنها&#34;]&#39;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">phrase</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;(&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;:&#34;</span><span class="o">+</span><span class="n">phrase</span><span class="p">[</span><span class="s1">&#39;firstRoot&#39;</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;) &#34;</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;application/json&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;[\&#34;دریانوردانی\&#34;, \&#34;جزایر\&#34;, \&#34;فرشتگان\&#34;, \&#34;تنها\&#34;]&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/Stemmer/LemmatizeWords2Phrase&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/Stemmer/LemmatizeWords2Phrase&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;[&#34;دریانوردانی&#34;, &#34;جزایر&#34;, &#34;فرشتگان&#34;, &#34;تنها&#34;]&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="آدرس-و-نوع-تابع-وب-سرویس-14">آدرس و نوع تابع وب‌سرویس</h3>
 
 <p><code>POST https://api.text-mining.ir/api/Stemmer/LemmatizeWords2Phrase</code></p>
@@ -1014,7 +1594,45 @@ verbInformation</p>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/ExtractSynonyms&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="kt">string</span><span class="na">[]</span><span class="p">&gt;(</span><span class="n">resp</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">###################### Call Text Similarity #########################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;TextSimilarity/ExtractSynonyms&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&#34;</span><span class="se">\&#34;</span><span class="s2">احسان</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;احسان\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/TextSimilarity/ExtractSynonyms&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/TextSimilarity/ExtractSynonyms&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;احسان&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: [&ldquo;احسان&rdquo;,&ldquo;نیکی کردن&rdquo;,&ldquo;نیکوکاری&rdquo;,&ldquo;بخشش&rdquo;,&ldquo;نیکی&rdquo;,&ldquo;خوبی&rdquo;,&ldquo;نیکویی&rdquo;,&ldquo;انعام&rdquo;,&ldquo;نکویی&rdquo;,&ldquo;اکرام&rdquo;,&ldquo;صنع&rdquo;,&ldquo;فضل&rdquo;,&ldquo;لطف&rdquo;,&ldquo;منت&rdquo;,&ldquo;نزل&rdquo;,&ldquo;نعمت&rdquo;,&ldquo;نیکی<em>کردن&rdquo;,&ldquo;احسان (نام)&rdquo;,&ldquo;احسان</em>(نام)&ldquo;]</p>
 </blockquote>
@@ -1079,7 +1697,44 @@ verbInformation</p>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/GetSyntacticDistance&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">double</span> <span class="n">similarity</span> <span class="p">=</span> <span class="m">1.0</span> <span class="p">-</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">###################### Call Text Similarity #########################</span>
+
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;TextSimilarity/GetSyntacticDistance&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;{&#34;string1&#34;: &#34;ایرانی ها&#34;, &#34;string2&#34;: &#34;ایرانیان&#34;, &#34;distanceFunc&#34;: 2}&#39;</span>  <span class="c1"># JaccardDistance</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;application/json&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\&#34;string1\&#34;: \&#34;ایرانی ها\&#34;, \&#34;string2\&#34;: \&#34;ایرانیان\&#34;, \&#34;distanceFunc\&#34;: 2}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/TextSimilarity/GetSyntacticDistance&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/TextSimilarity/GetSyntacticDistance&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{&#34;string1&#34;: &#34;ایرانی ها&#34;, &#34;string2&#34;: &#34;ایرانیان&#34;, &#34;distanceFunc&#34;: 2}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: 0.333333343</p>
 </blockquote>
@@ -1142,7 +1797,48 @@ verbInformation</p>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/SentenceSimilarityBipartiteMatching&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">double</span> <span class="n">distance</span> <span class="p">=</span> <span class="m">1.0</span> <span class="p">-</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;TextSimilarity/SentenceSimilarityBipartiteMatching&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;{
+</span><span class="s1">    &#34;string1&#34;: &#34;حمله مغولها به ایران&#34;,
+</span><span class="s1">    &#34;string2&#34;: &#34;حملات مغولان به ایران&#34;,
+</span><span class="s1">    &#34;distanceFunc&#34;: 2}&#39;&#39;&#39;</span>  <span class="c1"># JaccardDistance</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;application/json&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n    \&#34;string1\&#34;: \&#34;حمله مغولها به ایران\&#34;, \n    \&#34;string2\&#34;: \&#34;حملات مغولان به ایران\&#34;, \n    \&#34;distanceFunc\&#34;: 2}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityBipartiteMatching&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityBipartiteMatching&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">    &#34;string1&#34;: &#34;حمله مغولها به ایران&#34;,
+</span><span class="s1">    &#34;string2&#34;: &#34;حملات مغولان به ایران&#34;,
+</span><span class="s1">    &#34;distanceFunc&#34;: 2}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: 0.80357146263122559</p>
 </blockquote>
@@ -1206,7 +1902,50 @@ verbInformation</p>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/SentenceSimilarityWithIntersectionMatching&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">double</span> <span class="n">distance</span> <span class="p">=</span> <span class="m">1.0</span> <span class="p">-</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;TextSimilarity/SentenceSimilarityWithIntersectionMatching&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;{
+</span><span class="s1">    &#34;string1&#34;: &#34;حمله مغولها به ایران&#34;,
+</span><span class="s1">    &#34;string2&#34;: &#34;حملات مغولان به ایران&#34;,
+</span><span class="s1">    &#34;distanceFunc&#34;: 2,
+</span><span class="s1">    &#34;minDistThreshold&#34;: 0.3}&#39;&#39;&#39;</span>  <span class="c1"># حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;application/json&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n    \&#34;string1\&#34;: \&#34;حمله مغولها به ایران\&#34;, \n    \&#34;string2\&#34;: \&#34;حملات مغولان به ایران\&#34;, \n    \&#34;distanceFunc\&#34;: 2,\n    \&#34;minDistThreshold\&#34;: 0.3}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithIntersectionMatching&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithIntersectionMatching&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">    &#34;string1&#34;: &#34;حمله مغولها به ایران&#34;,
+</span><span class="s1">    &#34;string2&#34;: &#34;حملات مغولان به ایران&#34;,
+</span><span class="s1">    &#34;distanceFunc&#34;: 2,
+</span><span class="s1">    &#34;minDistThreshold&#34;: 0.3}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: 0.75</p>
 </blockquote>
@@ -1268,7 +2007,46 @@ verbInformation</p>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/SentenceSimilarityWithNearDuplicateDetector&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">double</span> <span class="n">distance</span> <span class="p">=</span> <span class="m">1.0</span> <span class="p">-</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;TextSimilarity/SentenceSimilarityWithNearDuplicateDetector&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;{
+</span><span class="s1">    &#34;string1&#34;: &#34;حمله مغولها به ایران&#34;,
+</span><span class="s1">    &#34;string2&#34;: &#34;حملات مغولان به ایران&#34;}&#39;&#39;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;application/json&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n    \&#34;string1\&#34;: \&#34;حمله مغولها به ایران\&#34;, \n    \&#34;string2\&#34;: \&#34;حملات مغولان به ایران\&#34;}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithNearDuplicateDetector&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithNearDuplicateDetector&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">    &#34;string1&#34;: &#34;حمله مغولها به ایران&#34;,
+</span><span class="s1">    &#34;string2&#34;: &#34;حملات مغولان به ایران&#34;}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: 0.5</p>
 </blockquote>
@@ -1332,7 +2110,50 @@ verbInformation</p>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;TextSimilarity/SentenceSimilarityWithNGramMatching&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">double</span> <span class="n">distance</span> <span class="p">=</span> <span class="m">1.0</span> <span class="p">-</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;TextSimilarity/SentenceSimilarityWithNGramMatching&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;{
+</span><span class="s1">    &#34;string1&#34;: &#34;حمله مغولها به ایران&#34;,
+</span><span class="s1">    &#34;string2&#34;: &#34;حملات مغولان به ایران&#34;,
+</span><span class="s1">    &#34;distanceFunc&#34;: 2,
+</span><span class="s1">    &#34;minDistThreshold&#34;: 0.3}&#39;&#39;&#39;</span>  <span class="c1"># حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;application/json&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n    \&#34;string1\&#34;: \&#34;حمله مغولها به ایران\&#34;, \n    \&#34;string2\&#34;: \&#34;حملات مغولان به ایران\&#34;, \n    \&#34;distanceFunc\&#34;: 2,\n    \&#34;minDistThreshold\&#34;: 0.3}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithNGramMatching&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithNGramMatching&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">    &#34;string1&#34;: &#34;حمله مغولها به ایران&#34;,
+</span><span class="s1">    &#34;string2&#34;: &#34;حملات مغولان به ایران&#34;,
+</span><span class="s1">    &#34;distanceFunc&#34;: 2,
+</span><span class="s1">    &#34;minDistThreshold&#34;: 0.3}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: 0.714285708963871</p>
 </blockquote>
@@ -1397,7 +2218,45 @@ verbInformation</p>
 <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="s">&#34;اصلا خوب نبود&#34;</span><span class="p">);</span>
 <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">baseAddress</span> <span class="p">+</span> <span class="s">&#34;SentimentAnalyzer/SentimentClassifier&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)).</span><span class="n">Result</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">resp</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">################## Call Sentiment Classification ####################</span>
+<span class="n">url</span> <span class="o">=</span>  <span class="n">baseUrl</span> <span class="o">+</span> <span class="s2">&#34;SentimentAnalyzer/SentimentClassifier&#34;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&#34;</span><span class="se">\&#34;</span><span class="s2">اصلا خوب نبود</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">callApi</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">tokenKey</span><span class="p">))</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;text/plain&#34;</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">&#34;{\n\ttext:\&#34;اصلا خوب نبود\&#34;\n}&#34;</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">&#34;https://api.text-mining.ir/api/SentimentAnalyzer/SentimentClassifier&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Content-Type&#34;</span><span class="o">,</span> <span class="s">&#34;application/json&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Authorization&#34;</span><span class="o">,</span> <span class="s">&#34;Bearer TOKEN_VALUE&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;cache-control&#34;</span><span class="o">,</span> <span class="s">&#34;no-cache&#34;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">();</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="s1">&#39;https://api.text-mining.ir/api/SentimentAnalyzer/SentimentClassifier&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nx">HTTP_METH_POST</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;cache-control&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;no-cache&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Authorization&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer TOKEN_VALUE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;{
+</span><span class="s1">	text:&#34;اصلا خوب نبود&#34;
+</span><span class="s1">}&#39;</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+
+  <span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>خروجی مثال کد بالا: 0</p>
 </blockquote>
@@ -1478,6 +2337,10 @@ verbInformation</p>
                 <a href="#" data-language-name="csharp">C#</a>
                 
                 <a href="#" data-language-name="python">Python</a>
+                
+                <a href="#" data-language-name="java">Java</a>
+                
+                <a href="#" data-language-name="php">PHP</a>
                 
             </div>
             
