@@ -651,7 +651,7 @@ Console.WriteLine(resp);
 
 ```python
 
-########################## Call Stemmer ##########################
+########################## Call SpellCorrector ##########################
 url =  baseUrl + "TextRefinement/SpellCorrector"
 payload = u'''{\"text\": \"فهوه با مبات میجسبد\",
             \"checkSlang\": true,
@@ -1199,6 +1199,8 @@ try {
 از این تابع برای ریشه‌یابی عبارات استفاده می‌شود.
 به عنوان مثال، خروجی متن کد نمونه به شکل زیر است
 
+`[ { "wordComment": "", "simplePos": "", "rootWords": ["دریانورد", "دریا"], "verbInformation": null, "sentenceNumber": 0, "wordNumberInSentence": 0, "startCharIndex": 0, "word": "دریانوردانی", "tags": null, "firstRoot": "دریانورد", "wordCount": 1, "length": 11, "isVerb": false, "isPunc": false }, { "wordComment": "", "simplePos": "", "rootWords": ["فرشته"], "verbInformation": null, "sentenceNumber": 0, "wordNumberInSentence": 0, "startCharIndex": 0, "word": "فرشتگان", "tags": null, "firstRoot": "فرشته", "wordCount": 1, "length": 7, "isVerb": false, "isPunc": false } ]`
+
 ```csharp
 
 string baseAddress = "https://api.text-mining.ir/api/";
@@ -1289,7 +1291,10 @@ try {
 ## ریشه یابی متن
 
 برای نمایش ریشه افعال شکل گذشته ساده درنظر گرفته میشود و سایر اطلاعات صرفی فعل در متغیر ذیل وجود دارد:
-verbInformation
+
+خروجی کد نمونه به شرح زیر است:
+
+‍‍‍‍‍`{دانشجویان,[دانشجو,دانش,دان]} {زیادی,[زیاد]} {به,[به]} {مدارس,[مدرسه]} {استعدادهای,[استعداد]} {درخشان,[درخشان]} {راه,[راه]} {پیدا,[پیدا]} {نخواهند کرد,[نکرد]} {که,[که]} {با,[با]} {مشکلات,[مشکل]} {بعدی,[بعد]} {مواجه,[مواجه]} {شوند,[شد]} {.,[]}`
 
 ```csharp
 
@@ -1474,6 +1479,10 @@ try {
 ## ریشه‌یابی لیست کلمات ورودی
 
 لیستی از کلمات ورودی را ریشه‌یابی می‌کند.
+
+خروجی کد نمونه به شرح زیر است:
+
+‍`[ { "wordComment":"مشاجرات", "simplePos":"", "rootWords":[ "مشاجرات", "مشاجره" ], "verbInformation":null, "sentenceNumber":1, "wordNumberInSentence":0, "startCharIndex":0, "word":"مشاجرات", "tags":{ }, "firstRoot":"مشاجرات", "wordCount":1, "length":7, "isVerb":false, "isPunc":false }, { "wordComment":"دریانوردانی", "simplePos":"", "rootWords":[ "دریانورد", "دریا" ], "verbInformation":null, "sentenceNumber":1, "wordNumberInSentence":1, "startCharIndex":8, "word":"دریانوردانی", "tags":{ }, "firstRoot":"دریانورد", "wordCount":1, "length":11, "isVerb":false, "isPunc":false }, { "wordComment":"جزایر", "simplePos":"", "rootWords":[ "جزیره" ], "verbInformation":null, "sentenceNumber":1, "wordNumberInSentence":2, "startCharIndex":20, "word":"جزایر", "tags":{ }, "firstRoot":"جزیره", "wordCount":1, "length":5, "isVerb":false, "isPunc":false }, { "wordComment":"فرشتگان", "simplePos":"", "rootWords":[ "فرشته" ], "verbInformation":null, "sentenceNumber":1, "wordNumberInSentence":3, "startCharIndex":26, "word":"فرشتگان", "tags":{ }, "firstRoot":"فرشته", "wordCount":1, "length":7, "isVerb":false, "isPunc":false }, { "wordComment":"تنها", "simplePos":"", "rootWords":[ "تنها" ], "verbInformation":null, "sentenceNumber":1, "wordNumberInSentence":4, "startCharIndex":34, "word":"تنها", "tags":{ }, "firstRoot":"تنها", "wordCount":1, "length":4, "isVerb":false, "isPunc":false } ]`
 
 ```csharp
 
