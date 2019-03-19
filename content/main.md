@@ -23,6 +23,7 @@ title: API Reference
 > مطمئن شوید که `YOUR_API_KEY` را با کلید API دریافتی خود جایگزین کرده‌اید
 
 ```csharp
+
 private string GetJWTToken()
 {
     string jwtToken = string.Empty;
@@ -35,9 +36,11 @@ private string GetJWTToken()
     }
     return jwtToken;
 }
+
 ```
 
 ```python
+
 import requests
 import json
 
@@ -58,6 +61,48 @@ querystring = {"apikey":"YOUR_API_KEY"}
 response = requests.request("GET", url, params=querystring)
 data = json.loads(response.text)
 tokenKey = data['token']
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/Token/GetToken?apikey=YOUR_API_KEY")
+  .get()
+  .addHeader("Content-Type", "application/json")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/Token/GetToken');
+$request->setMethod(HTTP_METH_GET);
+
+$request->setQueryData(array(
+  'apikey' => 'YOUR_API_KEY'
+));
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Content-Type' => 'application/json'
+));
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -102,6 +147,7 @@ string json = JsonConvert.SerializeObject(new
 var response = client.PostAsync(_baseAddress + "PreProcessing/NormalizePersianWord", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
+
 ```
 
 ```python
@@ -112,6 +158,52 @@ baseUrl = "http://api.text-mining.ir/api/"
 url =  baseUrl + "PreProcessing/NormalizePersianWord"
 payload = u"{\"text\":\"ولــے اگــر دڪــمــه مــڪــث رو لــمــس ڪــنــیــم ڪــلــا مــتــن چــنــدیــن صــفــحــه جــابــه جــا مــیــشــه و دیــگــه نــمــیــشــه فــهمــیــد ڪــدوم آیــه تــلــاوت مــی شود بــایــد چــے ڪــنــیــم؟.\", \"refineSeparatedAffix\":true}"
 print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"ولــے اگــر دڪــمــه مــڪــث رو لــمــس ڪــنــیــم ڪــلــا مــتــن چــنــدیــن صــفــحــه جــابــه جــا مــیــشــه و دیــگــه نــمــیــشــه فــهمــیــد ڪــدوم آیــه تــلــاوت مــی شود بــایــد چــے ڪــنــیــم؟.\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/PreProcessing/NormalizePersianWord")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/PreProcessing/NormalizePersianWord');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"ولــے اگــر دڪــمــه مــڪــث رو لــمــس ڪــنــیــم ڪــلــا مــتــن چــنــدیــن صــفــحــه جــابــه جــا مــیــشــه و دیــگــه نــمــیــشــه فــهمــیــد ڪــدوم آیــه تــلــاوت مــی شود بــایــد چــے ڪــنــیــم؟."
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -161,6 +253,69 @@ Console.WriteLine(resp);
 
 ```
 
+```python
+
+##################### Call Sentence Splitter ########################
+url =  baseUrl + "PreProcessing/SentenceSplitter"
+payload = u'''{\"text\": \"من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم\",
+    \"checkSlang\": true,
+    \"normalize\": true,
+    \"normalizerParams\": {
+        \"text\": \"don't care\",
+        \"RefineQuotationPunc \": false
+    },
+    \"complexSentence\": true
+}'''
+print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/PreProcessing/SentenceSplitter")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/PreProcessing/SentenceSplitter');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+
+```
+
 > خروجی مثال کد بالا: ["من با دوستم به مدرسه می‌رفتیم","و در آنجا مشغول به تحصیل بودیم .","سپس به دانشگاه راه یافتیم"]
 
 ### آدرس و نوع تابع وب‌سرویس
@@ -182,6 +337,7 @@ Console.WriteLine(resp);
 در این تابع شناسایی مرز جملات ساده/مرکب و جداسازی کلمات (توکن‌ها) آن انجام می‌شود
 
 ```csharp
+
 string baseAddress = "https://api.text-mining.ir/api/";
 HttpClient client = new HttpClient();
 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetJWTToken());
@@ -223,6 +379,52 @@ payload = u'''{\"text\": \"من با دوستم به مدرسه می رفتیم 
     \"complexSentence\": true
 }'''
 print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/PreProcessing/SentenceSplitterAndTokenize")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/PreProcessing/SentenceSplitterAndTokenize');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -271,6 +473,52 @@ print(callApi(url, payload, tokenKey))
 
 ```
 
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\tinputText:\"من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/PreProcessing/Tokenize")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/PreProcessing/Tokenize');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	inputText:"من با دوستم به مدرسه می رفتیم و در آنجا مشغول به تحصیل بودیم. سپس به دانشگاه راه یافتیم"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+
+```
+
 > خروجی مثال کد بالا: ["من","با","دوستم","به","مدرسه","می","رفتیم","و","در","آنجا","مشغول","به","تحصیل","بودیم","...","سپس","به","دانشگاه","راه","یافتیم"]
 
 ### آدرس و نوع تابع وب‌سرویس
@@ -290,6 +538,7 @@ print(callApi(url, payload, tokenKey))
 این تابع اشتباهات تایپی/املایی متن ورودی با توجه به محتوای جمله اصلاح میکند
 
 ```csharp
+
 string baseAddress = "https://api.text-mining.ir/api/";
 HttpClient client = new HttpClient();
 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetJWTToken());
@@ -304,6 +553,63 @@ string json = JsonConvert.SerializeObject(new
 var response = client.PostAsync(baseAddress + "TextRefinement/SpellCorrectorInContext", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
+
+```
+
+```python
+
+rl =  baseUrl + "TextRefinement/SpellCorrectorInContext"
+payload = u'''{\"text\": \"ستر حیوانی است که در صحرا با مقدار کم آب زندگی میکند\",
+            \"normalize\": true,
+            \"candidateCount\": 3}'''
+print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"ستر حیوانی است که در صحرا با مقدار کم آب زندگی میکند\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/TextRefinement/SpellCorrectorInContext")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/TextRefinement/SpellCorrectorInContext');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"ستر حیوانی است که در صحرا با مقدار کم آب زندگی میکند"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+
 ```
 
 > خروجی مثال کد بالا: {شتر,سطر,سفر} {حیوانی,حیوان,یونانی} {است,دست,هست} که در {صحرا,صفرا,صدرا} با {مقدار,مدار,مقدر} کم آب {زندگی,بندگی,زدگی} {می‌کند,می‌کند,مکند}
@@ -325,6 +631,7 @@ Console.WriteLine(resp);
 این تابع وب سرویس، اشتباهات تایپی را بر اساس لیست کلمات خود اصلاح می‌کند و کلمه درست را برمی‌گرداند. این تابع مانند همه توابع دیگر نیاز به توکن JWT برای احراز هویت دارد
 
 ```csharp
+
 string baseAddress = "https://api.text-mining.ir/api/";
 HttpClient client = new HttpClient();
 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetJWTToken());
@@ -339,6 +646,7 @@ string json = JsonConvert.SerializeObject(new
 var response = client.PostAsync(baseAddress + "TextRefinement/SpellCorrector", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
+
 ```
 
 ```python
@@ -350,6 +658,52 @@ payload = u'''{\"text\": \"فهوه با مبات میجسبد\",
             \"normalize\": true,
             \"candidateCount\": 2}'''
 print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"فهوه با مبات میجسبد\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/TextRefinement/SpellCorrector")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/TextRefinement/SpellCorrector');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"فهوه با مبات میجسبد"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -384,6 +738,7 @@ string json = JsonConvert.SerializeObject(inputText);
 var response = client.PostAsync(baseAddress + "TextRefinement/FormalConverter", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
+
 ```
 
 ```python
@@ -396,6 +751,51 @@ payload = u'''"اگه اون گزینه رو کلیک کنین، یه پنجره
     نمیدونم چی بگم که دیگه اونجا نره
     ساعت چن میتونین بیایین؟"'''
 print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\n\t\"اگه اون گزینه رو کلیک کنین، یه پنجره باز میشه که میتونین رمز عبورتون رو اونجا تغییر بدین داشتم مي رفتم برم، ديدم گرفت نشست، گفتم بذار بپرسم ببينم مياد نمياد ديدم ميگه نميخوام بيام بذار برم بگيرم بخوابم نمیتونم بشینم.  کتابای خودتونه  نمیدونم چی بگم که دیگه اونجا نره ساعت چن میتونین بیایین؟\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/TextRefinement/FormalConverter")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/TextRefinement/FormalConverter');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:
+	"اگه اون گزینه رو کلیک کنین، یه پنجره باز میشه که میتونین رمز عبورتون رو اونجا تغییر بدین داشتم مي رفتم برم، ديدم گرفت نشست، گفتم بذار بپرسم ببينم مياد نمياد ديدم ميگه نميخوام بيام بذار برم بگيرم بخوابم نمیتونم بشینم.  کتابای خودتونه  نمیدونم چی بگم که دیگه اونجا نره ساعت چن میتونین بیایین؟"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -431,6 +831,7 @@ var response = client.PostAsync(baseAddress + "TextRefinement/SwearWordTagger", 
 string resp = response.Content.ReadAsStringAsync().Result;
 var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(resp);
 Console.WriteLine(resp);
+
 ```
 
 ```python
@@ -441,6 +842,52 @@ payload = u'"خـــــــرررررهای دیووووونههه  -   صکس
 result = json.loads(callApi(url, payload, tokenKey))
 ## for item in result: ...
 print(result)
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"خـــــــرررررهای دیووووونههه  -   صکس  س.ک.س ی  \\r\\n بیپدرومادر\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/TextRefinement/SwearWordTagger")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/TextRefinement/SwearWordTagger');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"خـــــــرررررهای دیووووونههه  -   صکس  س.ک.س ی  \\r\\n بیپدرومادر"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -482,6 +929,53 @@ Console.WriteLine(resp);
 url =  baseUrl + "LanguageDetection/Predict"
 payload = u'"شام ییبسن یا یوخ. سن سیز بوغازیمنان گتمیر شام. به به نه قشه یردی. ساغ اول سیز نئجه سیز. نئجه سن؟ اوشاقلار نئجه دیر؟ سلام لاری وار سیزین کی لر نئجه دیر. یاخچی"'
 print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"شام ییبسن یا یوخ. سن سیز بوغازیمنان گتمیر شام. به به نه قشه یردی. ساغ اول سیز نئجه سیز. نئجه سن؟ اوشاقلار نئجه دیر؟ سلام لاری وار سیزین کی لر نئجه دیر. یاخچی\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/LanguageDetection/Predict")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/LanguageDetection/Predict');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"شام ییبسن یا یوخ. سن سیز بوغازیمنان گتمیر شام. به به نه قشه یردی. ساغ اول سیز نئجه سیز. نئجه سن؟ اوشاقلار نئجه دیر؟ سلام لاری وار سیزین کی لر نئجه دیر. یاخچی"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+
 ```
 
 > خروجی مثال کد بالا: azb
@@ -531,6 +1025,7 @@ var result = new StringBuilder();
 foreach (JObject token in tokens.Children<JObject>())
     result.AppendLine($"{{{token["word"]},{token["tags"]["NER"]["item1"]}}}");
 Console.WriteLine(result.ToString());
+
 ```
 
 ```python
@@ -542,6 +1037,51 @@ result = json.loads(callApi(url, payload, tokenKey))
 for phrase in result:
     print("("+phrase['word']+","+phrase['tags']['NER']['item1']+") ")
 
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\tinputText:\"احمد عباسی به تحصیلات خود در دانشگاه آزاد اسلامی در مشهد ادامه داد\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/NamedEntityRecognition/Detect")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/NamedEntityRecognition/Detect');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	inputText:"احمد عباسی به تحصیلات خود در دانشگاه آزاد اسلامی در مشهد ادامه داد"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -580,6 +1120,7 @@ var result = new StringBuilder();
 foreach (JObject token in tokens.Children<JObject>())
     result.AppendLine($"{{{token["word"]},{token["tags"]["POS"]["item1"]}}}");
 Console.WriteLine(result.ToString());
+
 ```
 
 ```python
@@ -591,6 +1132,51 @@ result = json.loads(callApi(url, payload, tokenKey))
 for phrase in result:
     print("("+phrase['word']+","+phrase['tags']['POS']['item1']+") ")
 
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"احمد و علی به مدرسه پایین خیابان می رفتند\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/NamedEntityRecognition/Detect")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/NamedEntityRecognition/Detect');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"احمد و علی به مدرسه پایین خیابان می رفتند"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -632,6 +1218,58 @@ string json = JsonConvert.SerializeObject(new
 var response = client.PostAsync(baseAddress + "Stemmer/LemmatizePhrase2Phrase", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
+
+```
+
+```python
+
+url =  baseUrl + "Stemmer/LemmatizePhrase2Phrase"
+payload = u'{"phrases": [{ "word": "دریانوردانی" }, { "word": "فرشتگان" }], "checkSlang": false}'
+print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\"phrases\": [{ \"word\": \"دریانوردانی\" }, { \"word\": \"فرشتگان\" }], \"checkSlang\": false}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/Stemmer/LemmatizePhrase2Phrase")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/Stemmer/LemmatizePhrase2Phrase');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{"phrases": [{ "word": "دریانوردانی" }, { "word": "فرشتگان" }], "checkSlang": false}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -682,6 +1320,60 @@ Console.WriteLine(result.ToString());
 
 ```
 
+```python
+
+url =  baseUrl + "Stemmer/LemmatizeText2Phrase"
+payload = u'{"text": "دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.", "checkSlang": false}'
+result = json.loads(callApi(url, payload, tokenKey))
+for phrase in result:
+    print("("+phrase['word']+":"+phrase['firstRoot']+") ")
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\"text\": \"دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.\", \"checkSlang\": false}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/Stemmer/LemmatizeText2Phrase")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/Stemmer/LemmatizeText2Phrase');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{"text": "دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.", "checkSlang": false}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+
+```
+
 ### آدرس و نوع تابع وب‌سرویس
 
 `POST https://api.text-mining.ir/api/Stemmer/LemmatizeText2Phrase`
@@ -719,6 +1411,51 @@ url =  baseUrl + "Stemmer/LemmatizeText2Text"
 payload = u'"دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند."'
 print(callApi(url, payload, tokenKey))
 
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند.\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/Stemmer/LemmatizeText2Text")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/Stemmer/LemmatizeText2Text');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"دانشجویان زیادی به مدارس استعدادهای درخشان راه پیدا نخواهند کرد که با مشکلات بعدی مواجه شوند."
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -751,6 +1488,60 @@ Console.WriteLine(resp);
 
 ```
 
+```python
+
+url =  baseUrl + "Stemmer/LemmatizeWords2Phrase"
+payload = u'["دریانوردانی", "جزایر", "فرشتگان", "تنها"]'
+result = json.loads(callApi(url, payload, tokenKey))
+for phrase in result:
+    print("("+phrase['word']+":"+phrase['firstRoot']+") ")
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "[\"دریانوردانی\", \"جزایر\", \"فرشتگان\", \"تنها\"]");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/Stemmer/LemmatizeWords2Phrase")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/Stemmer/LemmatizeWords2Phrase');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('["دریانوردانی", "جزایر", "فرشتگان", "تنها"]');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+
+```
+
 ### آدرس و نوع تابع وب‌سرویس
 
 `POST https://api.text-mining.ir/api/Stemmer/LemmatizeWords2Phrase`
@@ -778,6 +1569,61 @@ var response = client.PostAsync(baseAddress + "TextSimilarity/ExtractSynonyms", 
 string resp = response.Content.ReadAsStringAsync().Result;
 var result = JsonConvert.DeserializeObject<string[]>(resp);
 Console.WriteLine(resp);
+
+```
+
+```python
+
+###################### Call Text Similarity #########################
+url =  baseUrl + "TextSimilarity/ExtractSynonyms"
+payload = u"\"احسان\""
+print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"احسان\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/TextSimilarity/ExtractSynonyms")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/TextSimilarity/ExtractSynonyms');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"احسان"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -834,6 +1680,60 @@ Console.WriteLine(resp);
 
 ```
 
+```python
+
+###################### Call Text Similarity #########################
+
+url =  baseUrl + "TextSimilarity/GetSyntacticDistance"
+payload = u'{"string1": "ایرانی ها", "string2": "ایرانیان", "distanceFunc": 2}'  # JaccardDistance
+print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\"string1\": \"ایرانی ها\", \"string2\": \"ایرانیان\", \"distanceFunc\": 2}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/TextSimilarity/GetSyntacticDistance")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/TextSimilarity/GetSyntacticDistance');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{"string1": "ایرانی ها", "string2": "ایرانیان", "distanceFunc": 2}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+
+```
+
 > خروجی مثال کد بالا: 0.333333343
 
 ### آدرس و نوع تابع وب‌سرویس
@@ -869,6 +1769,64 @@ var response = client.PostAsync(baseAddress + "TextSimilarity/SentenceSimilarity
 string resp = response.Content.ReadAsStringAsync().Result;
 double distance = 1.0 - double.Parse(resp);
 Console.WriteLine(resp);
+
+```
+
+```python
+
+url =  baseUrl + "TextSimilarity/SentenceSimilarityBipartiteMatching"
+payload = u'''{
+    "string1": "حمله مغولها به ایران",
+    "string2": "حملات مغولان به ایران",
+    "distanceFunc": 2}'''  # JaccardDistance
+print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"string1\": \"حمله مغولها به ایران\", \n    \"string2\": \"حملات مغولان به ایران\", \n    \"distanceFunc\": 2}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityBipartiteMatching")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityBipartiteMatching');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+    "string1": "حمله مغولها به ایران",
+    "string2": "حملات مغولان به ایران",
+    "distanceFunc": 2}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 
@@ -911,6 +1869,66 @@ Console.WriteLine(resp);
 
 ```
 
+```python
+
+url =  baseUrl + "TextSimilarity/SentenceSimilarityWithIntersectionMatching"
+payload = u'''{
+    "string1": "حمله مغولها به ایران",
+    "string2": "حملات مغولان به ایران",
+    "distanceFunc": 2,
+    "minDistThreshold": 0.3}'''  # حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها
+print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"string1\": \"حمله مغولها به ایران\", \n    \"string2\": \"حملات مغولان به ایران\", \n    \"distanceFunc\": 2,\n    \"minDistThreshold\": 0.3}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithIntersectionMatching")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithIntersectionMatching');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+    "string1": "حمله مغولها به ایران",
+    "string2": "حملات مغولان به ایران",
+    "distanceFunc": 2,
+    "minDistThreshold": 0.3}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+
+```
+
 > خروجی مثال کد بالا: 0.75
 
 ### آدرس و نوع تابع وب‌سرویس
@@ -945,6 +1963,63 @@ var response = client.PostAsync(baseAddress + "TextSimilarity/SentenceSimilarity
 string resp = response.Content.ReadAsStringAsync().Result;
 double distance = 1.0 - double.Parse(resp);
 Console.WriteLine(resp);
+
+```
+
+```python
+
+url =  baseUrl + "TextSimilarity/SentenceSimilarityWithNearDuplicateDetector"
+payload = u'''{
+    "string1": "حمله مغولها به ایران",
+    "string2": "حملات مغولان به ایران"}'''
+print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"string1\": \"حمله مغولها به ایران\", \n    \"string2\": \"حملات مغولان به ایران\"}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithNearDuplicateDetector")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithNearDuplicateDetector');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+    "string1": "حمله مغولها به ایران",
+    "string2": "حملات مغولان به ایران"}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+
 ```
 
 > خروجی مثال کد بالا: 0.5
@@ -983,6 +2058,67 @@ var response = client.PostAsync(baseAddress + "TextSimilarity/SentenceSimilarity
 string resp = response.Content.ReadAsStringAsync().Result;
 double distance = 1.0 - double.Parse(resp);
 Console.WriteLine(resp);
+
+```
+
+```python
+
+url =  baseUrl + "TextSimilarity/SentenceSimilarityWithNGramMatching"
+payload = u'''{
+    "string1": "حمله مغولها به ایران",
+    "string2": "حملات مغولان به ایران",
+    "distanceFunc": 2,
+    "minDistThreshold": 0.3}'''  # حداقل فاصله دو کلمه برای انطباق (یکسان فرض نمودن) آنها
+print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"string1\": \"حمله مغولها به ایران\", \n    \"string2\": \"حملات مغولان به ایران\", \n    \"distanceFunc\": 2,\n    \"minDistThreshold\": 0.3}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithNGramMatching")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/TextSimilarity/SentenceSimilarityWithNGramMatching');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+    "string1": "حمله مغولها به ایران",
+    "string2": "حملات مغولان به ایران",
+    "distanceFunc": 2,
+    "minDistThreshold": 0.3}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+
 ```
 
 > خروجی مثال کد بالا: 0.714285708963871
@@ -1020,6 +2156,61 @@ string json = JsonConvert.SerializeObject("اصلا خوب نبود");
 var response = client.PostAsync(baseAddress + "SentimentAnalyzer/SentimentClassifier", new StringContent(json, Encoding.UTF8, "application/json")).Result;
 string resp = response.Content.ReadAsStringAsync().Result;
 Console.WriteLine(resp);
+
+```
+
+```python
+
+################## Call Sentiment Classification ####################
+url =  baseUrl + "SentimentAnalyzer/SentimentClassifier"
+payload = u"\"اصلا خوب نبود\""
+print(callApi(url, payload, tokenKey))
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\n\ttext:\"اصلا خوب نبود\"\n}");
+Request request = new Request.Builder()
+  .url("https://api.text-mining.ir/api/SentimentAnalyzer/SentimentClassifier")
+  .post(body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer TOKEN_VALUE")
+  .addHeader("cache-control", "no-cache")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+```php
+
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('https://api.text-mining.ir/api/SentimentAnalyzer/SentimentClassifier');
+$request->setMethod(HTTP_METH_POST);
+
+$request->setHeaders(array(
+  'cache-control' => 'no-cache',
+  'Authorization' => 'Bearer TOKEN_VALUE',
+  'Content-Type' => 'application/json'
+));
+
+$request->setBody('{
+	text:"اصلا خوب نبود"
+}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
 
 ```
 

@@ -25,6 +25,14 @@ name = "C#"
 key = "python"
 name = "Python" 
 
+[[params.language_tabs]]
+key = "java"
+name = "Java" 
+
+[[params.language_tabs]]
+key = "php"
+name = "PHP" 
+
 
 
 #Languages 
