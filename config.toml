@@ -14,7 +14,7 @@ pygmentsUseClasses = true
 defaultContentLanguage = "fa"
 
 [params]
-search = true
+search = false
   
 # Configure the language example tabs.
 [[params.language_tabs]]
