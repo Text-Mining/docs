@@ -1,7 +1,7 @@
 theme = "docuapi"
 languageCode = "fa-ir"
 baseurl = "http://docs.text-mining.ir/"
-title = "مستندات سرویس متن‌کاوی"
+title = "مستندات سرویس متن‌کاوی فارسی‌یار"
 
 # Code higlighting settings
 pygmentsCodefences = true
@@ -41,7 +41,7 @@ name = "PHP"
 [languages.fa]
 languageName = "فارسی"
 weight = 1
-title = "مستندات سرویس متن‌کاوی"
+title = "مستندات سرویس متن‌کاوی فارسی‌یار"
 
 # Left sidebar footer items. Use HTMl or Markdown.
 toc_footers = [ 
