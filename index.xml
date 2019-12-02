@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>مستندات سرویس متن‌کاوی</title>
+    <title>مستندات سرویس متن‌کاوی فارسی‌یار</title>
     <link>http://docs.text-mining.ir/</link>
-    <description>Recent content on مستندات سرویس متن‌کاوی</description>
+    <description>Recent content on مستندات سرویس متن‌کاوی فارسی‌یار</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fa-ir</language>
     
@@ -16,9 +16,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://docs.text-mining.ir/main/</guid>
-      <description>شروع به کار  دریافت کلید API برنامه‌نویسان برای استفاده از امکانات از سایت https://app.text-mining.ir می‌باشد.
-استفاده‌کنندگان رایگان از API، حداکثر مجاز به ارسال روزی ۱۰۰ درخواست (فراخوانی) و در هر ثانیه یک درخواست و هر فراخوانی (درخواست) با طول ورودی متنی کمتر از 3000 کاراکتر (یونیکد) یا 6000 هزاربایت می‌باشند.
- به مستدات سرویس متن‌کاوی خوش آمدید.
+      <description>شروع به کار  دریافت کلید API برنامه‌نویسان برای استفاده از امکانات از سایت https://app.text-mining.ir است.
+  استفاده‌کنندگان رایگان از API، حداکثر مجاز به ارسال روزی ۱۰۰ درخواست (فراخوانی) و در هر ثانیه یک درخواست و هر فراخوانی (درخواست) با طول ورودی متنی کمتر از 3000 کاراکتر (یونیکد) یا 6000 هزاربایت می‌باشند.
+ به مستندات سرویس متن‌کاوی فارسی‌یار خوش آمدید.
 متن‌کاوی، مجموعه‌ای از خدمات ‌آنلاین مربوط به پردازش متون فارسی را در قالب Rest API در اختیار برنامه‌نویسان قرار می‌دهد.</description>
     </item>
     
@@ -28,7 +28,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://docs.text-mining.ir/errors/</guid>
-      <description> خطاها در صورتی که درخواست ارسالی شما برای API به مشکلی برخورد نکند، کد 200 به همراه نتیجه تابع API برگردانده می‌شود  API متن‌کاوی به صورت کلی خطاهای زیر را برمی‌گرداند
+      <description>خطاها API متن‌کاوی به صورت کلی خطاهای زیر را برمی‌گرداند
    کد خطا معنا     400 Bad Request &amp;ndash; درخواست نامعتبر به دلیل اشتباه در پارامترهای ورودی   401 Unauthorized &amp;ndash; درخواست شما احراز هویت نشده است. ممکن است به دلیل کلید API اشتباه یا منقضی باشد   404 Not Found &amp;ndash; آدرس درخواستی شما در لیست توابع API وجود ندارد   500 Internal Server Error &amp;ndash; خطا در سرور API    </description>
     </item>
     
