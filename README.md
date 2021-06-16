@@ -16,3 +16,7 @@ now enter [`localhost:1313`](http://localhost:1313) in the address bar of your b
 ### Html Version
 if you don't want to run site from source code and just want to see html version of this site, you can [download gh-pages branch](https://github.com/Text-Mining/docs/archive/gh-pages.zip)
 
+---
+
+> For more information, please visit [hugo quick start page](https://gohugo.io/getting-started/quick-start/ "Create a Hugo site using the beautiful Ananke theme") and [this document](https://github.com/eine/issue-runner/blob/master/.github/workflows/doc.yml).
+

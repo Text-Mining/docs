@@ -1,0 +1,60 @@
+body, html, h1, h2, h3, h4, h5, h6 {
+  font-family: Vazir !important;
+}
+
+.content {
+  p, aside {
+    direction: rtl;
+    text-align: right !important;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  direction: rtl;
+  text-align: right !important;
+}
+
+.tocify-wrapper {
+  .tocify-item > a {
+    direction: rtl;
+    text-align: right !important;
+  }
+
+  .toc-footer {
+    li, a {
+      direction: rtl;
+      text-align: right !important;
+    }
+  }
+}
+
+.content table {
+  direction: rtl;
+  text-align: right !important;
+
+  td, th {
+    direction: rtl;
+    text-align: right !important;
+  }
+}
+
+ul li {
+  direction: rtl;
+  text-align: right !important;
+}
+
+.content {
+  code, p code {
+    direction: ltr;
+    text-align: left;
+    display: inline-block;
+  }
+
+  table {
+    overflow: inherit;
+  }
+
+  p {
+    line-height: 2em;
+  }
+}

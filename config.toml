@@ -1,7 +1,7 @@
-theme = "docuapi"
 languageCode = "fa-ir"
 baseurl = "http://docs.text-mining.ir/"
 title = "مستندات سرویس متن‌کاوی فارسی‌یار"
+theme = "docuapi"
 
 # Code higlighting settings
 pygmentsCodefences = true
@@ -12,6 +12,19 @@ pygmentsStyle = "monokai"
 pygmentsUseClasses = true
 
 defaultContentLanguage = "fa"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      autoHeadingIDType = "github-ascii"
+    [markup.goldmark.renderer]
+        unsafe = true
+
+[module]
+[module.hugoVersion]
+[[module.imports]]
+# We include the theme by "../.." above, but we need one module import for Hugo to detect us as a Hugo Module.
+path="github.com/bep/empty-hugo-module"
 
 [params]
 search = false
