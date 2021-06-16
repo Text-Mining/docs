@@ -5,19 +5,16 @@
     <link>http://docs.text-mining.ir/</link>
     <description>Recent content on مستندات سرویس متن‌کاوی فارسی‌یار</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>fa-ir</language>
-    
-	<atom:link href="http://docs.text-mining.ir/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>fa-ir</language><atom:link href="http://docs.text-mining.ir/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>API Reference</title>
       <link>http://docs.text-mining.ir/main/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://docs.text-mining.ir/main/</guid>
-      <description>شروع به کار  دریافت کلید API برنامه‌نویسان برای استفاده از امکانات از سایت https://app.text-mining.ir است.
-  استفاده‌کنندگان رایگان از API، حداکثر مجاز به ارسال روزی ۱۰۰ درخواست (فراخوانی) و در هر ثانیه یک درخواست و هر فراخوانی (درخواست) با طول ورودی متنی کمتر از 3000 کاراکتر (یونیکد) یا 6000 هزاربایت می‌باشند.
+      <description>شروع به کار دریافت کلید API برنامه‌نویسان برای استفاده از امکانات از سایت https://app.text-mining.ir است.
+  استفاده‌کنندگان رایگان از API، حداکثر مجاز به ارسال روزی ۱۰۰۰ واحد درخواست (فراخوانی) و در هر ثانیه یک درخواست هستند.
+  لیست کامل توابع API در قالب swagger در آدرس https://api.text-mining.ir در دسترس است.
  به مستندات سرویس متن‌کاوی فارسی‌یار خوش آمدید.
 متن‌کاوی، مجموعه‌ای از خدمات ‌آنلاین مربوط به پردازش متون فارسی را در قالب Rest API در اختیار برنامه‌نویسان قرار می‌دهد.</description>
     </item>
@@ -28,8 +25,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://docs.text-mining.ir/errors/</guid>
-      <description>خطاها API متن‌کاوی به صورت کلی خطاهای زیر را برمی‌گرداند
-   کد خطا معنا     400 Bad Request &amp;ndash; درخواست نامعتبر به دلیل اشتباه در پارامترهای ورودی   401 Unauthorized &amp;ndash; درخواست شما احراز هویت نشده است. ممکن است به دلیل کلید API اشتباه یا منقضی باشد   404 Not Found &amp;ndash; آدرس درخواستی شما در لیست توابع API وجود ندارد   500 Internal Server Error &amp;ndash; خطا در سرور API    </description>
+      <description> خطاهادر صورتی که درخواست ارسالی شما برای API به مشکلی برخورد نکند، کد 200 به همراه نتیجه تابع API برگردانده می‌شودAPI متن‌کاوی به صورت کلی خطاهای زیر را برمی‌گرداند
+   کد خطا معنا     400 Bad Request &amp;ndash; درخواست نامعتبر به دلیل اشتباه در پارامترهای ورودی   401 Unauthorized &amp;ndash; درخواست شما احراز هویت نشده است. ممکن است به دلیل کلید API اشتباه یا منقضی شده (پایان دوره اعتبار مشخص شده در پنل توسعه‌دهندگان) یا توکن منقضی شده (چون توکن بعد از نیم ساعت منقضی می‌شود) باشد   404 Not Found &amp;ndash; آدرس درخواستی شما در لیست توابع API وجود ندارد   500 Internal Server Error &amp;ndash; خطا در سرور API    </description>
     </item>
     
   </channel>
